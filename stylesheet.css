@@ -1,0 +1,47 @@
+#menu-button {
+	float: right;
+}
+#login-button, #SignUp-button {
+	background-color:#39ac73;
+	opacity: 0.8;
+	border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+	border-radius: 12px;
+	width:100px;
+	height:50px;
+}
+.welcome {
+	text-align:center;
+	margin-top: 100px;
+	margin-bottom: 75px;
+    display: inline-block;
+    width: 100%;
+	font-size:300%;
+	color: white;
+}
+.login{
+    text-align: center;
+}
+#user, #password {
+	width:220px;
+	height:40px;
+	text-align: center;
+	border: none;
+	border-radius: 12px;
+	font-size:20px;
+	opacity:0.7;
+}
+#submit-login{
+	width:220px;
+	height:40px;
+	text-align: center;
+	border-radius: 12px;
+	font-size:20px;
+	color:white;
+	border: none;
+	background-color: #39ac73;
+}
