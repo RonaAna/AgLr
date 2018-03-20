@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>	
+	<title> Main Page </title>
+	<link rel="stylesheet" href="CSS/stylesheet.css" type="text/css">
+</head>
+<body background = "Images/back.jpg">
+	<div>
+		<input type="button" id ="Add-button" value = "Add field">
+	</div>
+	<div class = "add-field" id = "add-field-form">
+		<div class = "fields">
+			Field Name:
+			<input type="text" id="fieldname" placeholder="Field Name" autofocus required />
+		</div>
+		<div class = "fields">
+			Registration Nr.:
+			<input type="text" id="registrationNr" placeholder="Registration Nr." required />
+		</div>
+		<div class = "fields">
+			Dimensions:
+			<input type="text" id="dimensions" placeholder="Dimensions" required />
+		</div>
+		<div class = "fields">
+			Zone/Address:
+			<input type="text" id="zone" placeholder="Zone/Address" required />
+		</div>
+		<div class = "fields">
+			Geo Coordinates:
+			<input type="text" id="Coordinate" placeholder="Coordinate" required />
+		</div>
+		<div class = "fields">
+			Pedoclimatic charcs:
+			<input type="text" id="pedoclimatic" placeholder="temperate clime" required />
+		</div>
+		<div class = "fields">
+			Land type:
+			<input type="text" id="landType" placeholder="arable/unreachable land" required />
+		</div>
+		<div class = "fields">
+			Value:
+			<input type="text" id="landValue" placeholder="15000$" required />
+		</div>
+		<div class = "fields">
+			Data of interest:
+			<input type="text" id="interests" placeholder="crossed by the river" required />
+		</div>
+		<div class = "fields">
+			Mentions:
+		<textarea type="text" id="mentions" placeholder="Mentions: "></textarea><br>
+		</div>
+	</div>
+	<form id = "owner">
+  		<input type="radio" name="owner" value="Individual" checked> Individual <br>
+  		<input type="radio" name="owner" value="Company"> Company<br>
+  		<input type="radio" name="owner" value="Farm"> Farm  
+	</form> 
+
+</body>
+</html>
