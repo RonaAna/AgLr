@@ -93,3 +93,62 @@ input[type="submit"]:active {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   transition: 0.1s ease;
 }
+
+#Add-button{
+	background-color:#39ac73;
+	opacity: 0.8;
+	border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+	border-radius: 12px;
+	width:100px;
+	height:50px;
+}
+
+ #fieldname,#zone,
+#Coordinate, #pedoclimatic,
+#registrationNr, #dimensions,
+#mentions , #landType,
+#landValue, #interests{
+	display:inline-block;
+	border: none;
+	border-radius: 5px;
+	font-size:20px;
+	opacity:0.7;
+	padding:1px 4px 1px 4px;
+	float:right;
+	margin-right:45%;
+}
+
+.fields{
+	display:block;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	margin-right: auto;
+	margin-left: 10%;
+	border: none;
+	border-radius: 7px;
+	font-size:20px;
+	opacity:0.9;
+}
+
+
+#add-field-form {
+	margin-top: 3%;
+}
+
+#mentions {
+	height:75px;
+	width:253px;
+}
+
+#owner{
+	margin-top: 5%;
+	margin-bottom: 1%;
+	margin-right: auto;
+	margin-left: 20%;
+	font-size:20px;
+}
