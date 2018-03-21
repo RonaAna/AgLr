@@ -1,7 +1,7 @@
 #menu-button {
 	float: right;
 }
-#login-button, #SignUp-button {
+.menu-btn,#Add-button {
 	background-color:#39ac73;
 	opacity: 0.8;
 	border: none;
@@ -37,11 +37,7 @@
 	font-size:20px;
 	opacity:0.7;
 }
-#firstname,
-#lastname,
-#register-password,
-#password2,
-#register-email {
+.user-data {
 	width:220px;
 	height:40px;
 	text-align: center;
@@ -55,7 +51,7 @@
 	margin-top: 1%;
 	margin-bottom: 1%;
 }
-#submit-login,#register-btn{
+.submit-btn {
 	width:220px;
 	height:40px;
 	text-align: center;
@@ -68,11 +64,13 @@
 #register-form {display: none;
 border: none;
 }
-#register-btn{margin-right: auto;
+#register-btn,.trash-button{
+	margin-right: auto;
 	margin-left: auto;
 	display:block;
 	margin-top: 1%;
-	margin-bottom: 1%;}
+	margin-bottom: 1%;
+}
 
 input[type="text"]:focus,
 input[type="password"]:focus {
@@ -94,25 +92,11 @@ input[type="submit"]:active {
   transition: 0.1s ease;
 }
 
-#Add-button{
-	background-color:#39ac73;
-	opacity: 0.8;
-	border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-	border-radius: 12px;
-	width:100px;
-	height:50px;
-}
-
- #fieldname,#zone,
+#fieldname,#zone, 
 #Coordinate, #pedoclimatic,
 #registrationNr, #dimensions,
 #mentions , #landType,
-#landValue, #interests{
+#landValue, #interests {
 	display:inline-block;
 	border: none;
 	border-radius: 5px;
@@ -123,7 +107,7 @@ input[type="submit"]:active {
 	margin-right:45%;
 }
 
-.fields{
+.fields,#t01 td div{
 	display:block;
 	margin-top: 1%;
 	margin-bottom: 1%;
@@ -134,8 +118,6 @@ input[type="submit"]:active {
 	font-size:20px;
 	opacity:0.9;
 }
-
-
 #add-field-form {
 	margin-top: 3%;
 }
@@ -151,4 +133,51 @@ input[type="submit"]:active {
 	margin-right: auto;
 	margin-left: 20%;
 	font-size:20px;
+}
+#t01 {
+    border-collapse: collapse;
+    width: 60%;
+    margin:10%;
+    background-color: #f1f1c1;
+}
+#t01 td div, #t01 th div {
+	display:inline;
+	font-size:150%;
+}
+#t01 td, #t01 th {
+    padding: 2%;
+}
+#t01 th {
+	margin-bottom:5px;
+}
+#t01 td input[type = "text"] {width: 84%;}
+#t01 tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#t01 tr:hover { 
+	background-color: #ddd;
+}
+
+#t01 th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+.trash-button {
+	display:inline-block;
+	font-size: 18px;
+	font-family: FontAwasome;
+	color:darkblue;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+#t01 {
+border-collapse: collapse;
+width: 100%;
 }
