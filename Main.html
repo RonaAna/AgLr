@@ -4,7 +4,7 @@
 	<title> Main Page </title>
 	<link rel="stylesheet" href="CSS/stylesheet.css" type="text/css">
 </head>
-<body background = "Images/back.jpg">
+<body style="background-image:url('Images/back.jpg');">
 	<div class = "words" id="phrase1"> These are the fields above whom you have rigths!</div>
 	<table id = "t01">
 		<tr>
@@ -15,7 +15,7 @@
 			<td><div>Teren bunici</div></td>
 			<td>
 				<button class="trash-button" type="button">
-					<img src ="Images/trash.png" width="10px" height="15px" />Delete
+					<img src ="Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
 				</button>
 			</td>
 		</tr>
@@ -23,26 +23,28 @@
 			<td><div> Padure de brazi</div></td>
 			<td>
 				<button class="trash-button" type="button">
-					<img src ="Images/trash.png" width="10px" height="15px" />Delete
+					<img src ="Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
 				</button>
 			</td>
 		</tr>
 		<tr>
-			<td><div>Teren agricol de la Baneasa</div></td>
+			<td><div>Teren agricol de la Margineni</div></td>
 			<td>
 				<button class="trash-button" type="button">
-					<img src ="Images/trash.png" width="10px" height="15px" />Delete
+					<img src ="Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
 				</button>
 			</td>
 		</tr>
 	</table> 
 
-	<div class = "words"> If you have informations about other lands you owe, you can make an import of data for more fields just clicking on a button!</div>
+	<div class = "words"> If you have informations about other lands you owe, you can make an import data here!</div>
 	<div><input class="submit-btn" type="submit" id="Import-btn" value="Import"/></div>
 	<div class = "words"> And you can Add a new field manually or edit an already saved field!</div>
-		<div >
+	<div style="display: flex; justify-content: center">
 		<input type="submit" class="submit-btn" id ="Add-button" value = "Add field">
 	</div>
+	<div class = "display-map"><img src = "Images/HartaMargineni.PNG" alt="harta" id = "harta"/></div>
+
 	<div class = "add-field" id = "add-field-form">
 		<div class = "fields">
 			Field Name:
@@ -82,14 +84,14 @@
 		</div>
 		<div class = "fields">
 			Mentions:
-		<textarea type="text" id="mentions" placeholder="Mentions: "></textarea><br>
+		<textarea  id="mentions" placeholder="Mentions: "></textarea><br>
 		</div>
 	</div>
+
 	<form id = "owner">
   		<input type="radio" name="owner" value="Individual" checked> Individual <br>
   		<input type="radio" name="owner" value="Company"> Company<br>
   		<input type="radio" name="owner" value="Farm"> Farm  
 	</form> 
-
 </body>
 </html>
