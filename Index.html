@@ -4,8 +4,8 @@
 	<title> Login </title>
 	<link rel="stylesheet" href="CSS/stylesheet.css" type="text/css">
 </head>
-<body background = "Images/background.jpg">
-    <div id = "menu-button"> 
+<body style="background-image:url('Images/background.jpg')">
+    <div  id = "menu-button"> 
 		<input type="button" class = "menu-btn" id = "login-button" value="Login" onClick="HideRegister()">
 		<input type="button" class = "menu-btn" id = "SignUp-button" value="Sign Up" onClick = "HideLogin()">
 	</div>
@@ -25,7 +25,7 @@
 	    
 	    <input class="submit-btn" type="submit" id="register-btn" value="Sign me up" />
 	</div>
-<script type="text/javascript">
+<script>
 
 function HideLogin(){
 document.getElementById("loginID").style.display = "none";
