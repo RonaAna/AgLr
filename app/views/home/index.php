@@ -79,18 +79,22 @@ session_start
         document.getElementById("loginID").style.display="block";
 
     }
-    function Login(){
-        var user= {
-            Email : document.getElementById('email').value,
-            Password : document.getElementById('password').value,
+    function LogIn(){
+        const user = {
+            username: "AnaTest",
+            password: "Admin1234"
         }
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:82/AdwiserBST/public/account/Login", true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.onload = function(){
-            alert(xmlhttp.response);
+        var login = function () {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username === user.name && password === user.password) {
+                document.getElementById("submit-login").classList.add("hidden");
+                alert("Ai fost logat cu succes!");
+            } else {
+                alert("Username sau parola incorect!")
+            }
         }
-        xmlhttp.send("user=" + JSON.stringify(user));
 
     }
     function RetypePasswd(){
