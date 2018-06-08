@@ -5,7 +5,7 @@
  * Date: 04.06.2018
  * Time: 1:00
  */
-session_start
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,15 +19,14 @@ session_start
     <input type="button" class = "menu-btn" id = "SignUp-button" value="Sign Up" onClick = "HideLogin()">
 </div>
 <div class = "welcome"> Welcome to Agricultural Land Manager! </div>
-<div class = "login" id = "loginID" method = "post" action="">
+<div class = "login" id = "loginID" method = "post" action="index/home.php">
     <input class ="login-data" type="text" id ="user" placeholder="email" >
     <input  class ="login-data" type="password" id ="password" placeholder="password" >
-    <button  class="submit-btn" type="submit" id = "submit-login" value="Submit" onClick="LogIn()">Submit</button>
+    <input  class="submit-btn" type="submit" id = "submit-login" value="Submit" onClick="Login()">
 </div>
 <div class ="register" id = "register-form" method = "post" action = "index/home.php">
     <form><input  class ="user-data" type="text" id="firstname" placeholder="FirstName" autofocus required />
         <input  class ="user-data" type="text" id="lastname" placeholder="LastName" required />
-
         <input  class ="user-data" type="email"  id="register-email" placeholder="E-mail" required />
         <input  class ="user-data" type="password" id="register-password" placeholder="Password" required />
         <input  class ="user-data" type="password" id="password2" placeholder="Retype password" onfocusout="RetypePasswd()" required />
@@ -81,7 +80,7 @@ session_start
     }
     function Login(){
         var user= {
-            Email : document.getElementById('email').value,
+            Email : document.getElementById('user').value,
             Password : document.getElementById('password').value,
         }
         var xmlhttp = new XMLHttpRequest();
