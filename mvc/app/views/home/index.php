@@ -2,108 +2,150 @@
 /**
  * Created by PhpStorm.
  * User: Ana-Maria
- * Date: 04.06.2018
- * Time: 1:00
- */
-session_start();
-?>
+ * Date: 08.06.2018
+ * Time: 22:14
+ */?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title> Login </title>
-    <link rel="stylesheet" href="../../public/css/stylesheet.css" type="text/css">
+	<title> Main Page </title>
+	<link rel="stylesheet" href="../css/stylesheet.css" type="text/css">
 </head>
-<body style="background-image:url('../../public/Images/background.jpg')">
-<div  id = "menu-button">
-    <input type="button" class = "menu-btn" id = "login-button" value="Login" onClick="HideRegister()">
-    <input type="button" class = "menu-btn" id = "SignUp-button" value="Sign Up" onClick = "HideLogin()">
-</div>
-<div class = "welcome"> Welcome to Agricultural Land Manager! </div>
-<div class = "login" id = "loginID" method = "post" action="index/home.php">
-    <input class ="login-data" type="text" id ="user" placeholder="email" >
-    <input  class ="login-data" type="password" id ="password" placeholder="password" >
-    <input  class="submit-btn" type="submit" id = "submit-login" value="Submit" onClick="Login()">
-</div>
-<div class ="register" id = "register-form" method = "post" action = "index/home.php">
-    <form><input  class ="user-data" type="text" id="firstname" placeholder="FirstName" autofocus required />
-        <input  class ="user-data" type="text" id="lastname" placeholder="LastName" required />
-        <input  class ="user-data" type="email"  id="register-email" placeholder="E-mail" required />
-        <input  class ="user-data" type="password" id="register-password" placeholder="Password" required />
-        <input  class ="user-data" type="password" id="password2" placeholder="Retype password" onfocusout="RetypePasswd()" required />
+<body style="background-image:url('../Images/back.jpg');">
+	<div class = "words" id="phrase1"> These are the fields above for whom you have rigths!</div>
 
-        <input class="submit-btn" type="button" id="register-btn" value="Sign me up" onClick="SignUp()" />
-        <p>
-            Already a member? <a href="login.php">SignIn</a>
-        </p>
-    </form></div>
+	<table id = "t01">
+		<tr>
+			<th><div>Field Description</div></th>
+			<th></th>
+		</tr>
+		<tr>
+			<td><div>Teren bunici</div></td>
+			<td>
+				<button class="trash-button" type="button">
+					<img src ="../Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
+				</button>
+			</td>
+		</tr>
+		<tr>
+			<td><div> Padure de brazi</div></td>
+			<td>
+				<button class="trash-button" type="button">
+					<img src ="../Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
+				</button>
+			</td>
+		</tr>
+		<tr>
+			<td><div>Teren agricol de la Margineni</div></td>
+			<td>
+				<button class="trash-button" type="button">
+					<img src ="../Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
+				</button>
+			</td>
+		</tr>
+	</table>
+
+	<div class = "words"> If you have informations about other lands you own, you can make a data import here!</div>
+	<div><input class="submit-btn" type="submit" id="Import-btn" value="Import"/></div>
+	<div class = "words"> And you can Add a new field manually or edit an already saved field!</div>
+	<div style="display: flex; justify-content: center">
+		<input type="submit" class="submit-btn" id ="Add-button" value = "Add field">
+	</div>
+	<div class = "display-map"><img src = "../Images/HartaMargineni.PNG" alt="harta" id = "harta"/></div>
+
+	<div class = "add-field" id = "add-field-form">
+		<div class = "fields">
+Field Name:
+			<input type="text" id="fieldname" placeholder="Field Name" autofocus required />
+		</div>
+		<div class = "fields">
+Registration Nr.:
+			<input type="text" id="registrationNr" placeholder="Registration Nr." required />
+		</div>
+		<div class = "fields">
+Dimensions:
+			<input type="text" id="dimensions" placeholder="Dimensions" required />
+		</div>
+		<div class = "fields">
+Zone:
+            <input type="text" id="zone" placeholder="Zone" required />
+        </div>
+        <div class = "fields">
+            Address:
+			<input type="text" id="address" placeholder="Address" required />
+		</div>
+		<div class = "fields">
+Latitude:
+			<input type="text" id="latitude" placeholder="-20.000" required />
+		</div>
+		<div class = "fields">
+            Longitude:
+            <input type="text" id="longitude" placeholder="45.23444763" required />
+        </div>
+        <div class = "fields">
+Pedoclimatic charcs:
+			<input type="text" id="pedoclimatic" placeholder="temperate clime" required />
+		</div>
+		<div class = "fields">
+Land type:
+			<input type="text" id="landType" placeholder="arable/unreachable land" required />
+		</div>
+		<div class = "fields">
+Value:
+			<input type="text" id="landValue" placeholder="15000$" required />
+		</div>
+		<div class = "fields">
+Data of interest:
+			<input type="text" id="interests" placeholder="crossed by the river" required />
+		</div>
+		<div class = "fields">
+Mentions:
+		<textarea  id="mentions" placeholder="Mentions: "></textarea><br>
+		</div>
+	</div>
+
+	<form id = "owner">
+  		<input type="radio" name="owner" value="Individual" checked> Individual <br>
+  		<input type="radio" name="owner" value="Company"> Company<br>
+  		<input type="radio" name="owner" value="Farm"> Farm
+	</form>
+	<div><input class="submit-btn" type="submit" id="Export-btn" value="Export"/></div>
 <script>
-
-    function test()
-    {
+    function RetrieveFields() {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:82/AdwiserBST/public/home/PostTest", true);
+        xmlhttp.open("GET", "http://localhost:82/AdwiserBST/public/home/GetFields", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
-            debugger;
             console.log(xmlhttp.response);
         }
-        var tst = {nume:"normale"};
-
-        xmlhttp.send("x=" + JSON.stringify(tst));
+        xmlhttp.send();
     }
-
-    function SignUp(){
-        var user= {
-            FirstName : document.getElementById('firstname').value,
-            LastName : document.getElementById('lastname').value,
-            Email : document.getElementById('register-email').value,
-            Password : document.getElementById('register-password').value,
-            RetypedPassword : document.getElementById('password2').value
+    RetrieveFields();
+    function AddField()
+    {
+        var field = {
+            FieldName : document.getElementById("fieldname").value,
+            RegisterNumber :document.getElementById("registrationNr").value,
+            Dimensions : document.getElementById("dimensions").value,
+            Zone : document.getElementById("zone").value,
+            Address :document.getElementById("address").value,
+            Latitude : document.getElementById("latitude").value,
+            Longitude : document.getElementById("longitude").value,
+            Climatics : document.getElementById("pedoclimatic").value,
+            LandType : document.getElementById("landType").value,
+            Value : document.getElementById("landValue").value
         }
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:82/AdwiserBST/public/account/RegisterUser", true);
+        xmlhttp.open("POST", "http://localhost:82/AdwiserBST/public/home/AddField", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
-            alert(xmlhttp.response);
+            console.log(xmlhttp.response);
         }
-        xmlhttp.send("user=" + JSON.stringify(user));
+        xmlhttp.send('field=' + JSON.stringify(field));
     }
+    AddField();
 
-    function HideLogin(){
-        document.getElementById("loginID").style.display = "none";
-        document.getElementById("register-form").style.display="block";
-    }
-    function HideRegister(){
-        document.getElementById("register-form").style.display = "none";
-        document.getElementById("loginID").style.display="block";
 
-    }
-    function Login(){
-        var user= {
-            Email : document.getElementById('user').value,
-            Password : document.getElementById('password').value,
-        }
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:82/AdwiserBST/public/account/Login", true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.onload = function(){
-            alert(xmlhttp.response);
-        }
-        xmlhttp.send("user=" + JSON.stringify(user));
-
-    }
-    function RetypePasswd(){
-        var password = document.getElementById("register-password").value;
-        if(password != '') {
-            var password2 = document.getElementById("password2").value;
-            if (password == password2) {
-                alert("Parolele coincid! ^.^");
-            } else {
-                alert("Parolele nu coincid! :(");
-            }
-        }
-    }
 </script>
 </body>
 </html>
-

@@ -7,6 +7,11 @@
  */
 class Account extends Controller
 {
+    public function Index()
+    {
+        echo 'rout99ng';
+        $this->view('account\index');
+    }
 
     public function RegisterUser()
     {
@@ -78,7 +83,10 @@ class Account extends Controller
         if($userEmail->num_rows > 0) {
             echo "You have been successful connected!";
             $userEmail->close();
-            return;
+            //$this->view('home\index');
+            $location= 'http://localhost:82/AdwiserBST/public/home/index';
+            header("Location: " . $location);
+            exit();
         }
         else{
             echo "Incorrect email or password!";
