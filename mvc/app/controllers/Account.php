@@ -13,6 +13,10 @@ class Account extends Controller
         $this->view('account\index');
     }
 
+    public function Home()
+    {
+        $this->view('home\index');
+    }
     public function RegisterUser()
     {
         $user = json_decode($_POST['user']);
@@ -84,9 +88,10 @@ class Account extends Controller
             echo "You have been successful connected!";
             $userEmail->close();
             //$this->view('home\index');
-            $location= 'http://localhost:82/AdwiserBST/public/home/index';
-            header("Location: " . $location);
-            exit();
+            //$location= 'http://localhost:82/AdwiserBST/public/home/index';
+            //header("Location: " . $location);
+            //exit();
+            $this->Home();
         }
         else{
             echo "Incorrect email or password!";

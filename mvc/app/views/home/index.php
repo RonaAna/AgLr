@@ -18,7 +18,8 @@
 		<tr>
 			<th><div>Field Description</div></th>
 			<th></th>
-		</tr>
+            <th></th>
+        </tr>
 		<tr>
 			<td><div>Teren bunici</div></td>
 			<td>
@@ -28,7 +29,7 @@
 			</td>
 			<td>
 				<button class="trash-button" type="button">
-					<img src ="../Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
+					<img src ="../../public/Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
 				</button>
 			</td>
 		</tr>
@@ -41,7 +42,7 @@
 			</td>
 			<td>
 				<button class="trash-button" type="button">
-					<img src ="../Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
+					<img src ="../../public/Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
 				</button>
 			</td>
 		</tr>
@@ -54,7 +55,7 @@
 			</td>
 			<td>
 				<button class="trash-button" type="button">
-					<img src ="../Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
+					<img src ="../../public/Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
 				</button>
 			</td>
 		</tr>
@@ -66,7 +67,7 @@
 	<div style="display: flex; justify-content: center">
 		<input type="submit" class="submit-btn" id ="Add-button" value = "Add field">
 	</div>
-	<div class = "display-map"><img src = "../Images/HartaMargineni.PNG" alt="harta" id = "harta"/></div>
+	<div class = "display-map"><img src = "../../public/Images/HartaMargineni.PNG" alt="harta" id = "harta"/></div>
 
 	<div class = "add-field" id = "add-field-form">
 		<div class = "fields">
@@ -128,7 +129,7 @@ Mentions:
 <script>
     function RetrieveFields() {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "http://localhost:80/AdwiserBST/public/home/GetFields", true);
+        xmlhttp.open("GET", "http://localhost:82/AgLr/mvc/public/home/GetFields", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
             console.log(xmlhttp.response);
@@ -151,7 +152,7 @@ Mentions:
             Value : document.getElementById("landValue").value
         }
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:80/AdwiserBST/public/home/AddField", true);
+        xmlhttp.open("POST", "http://localhost:82/AgLr/mvc/public/home/AddField", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
             console.log(xmlhttp.response);
@@ -174,7 +175,7 @@ Mentions:
             Value : document.getElementById("landValue").value
         }
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:80/AdwiserBST/public/home/EditField", true);
+        xmlhttp.open("POST", "http://localhost:82/AgLr/mvc/public/home/EditField", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
             console.log(xmlhttp.response);
