@@ -15,7 +15,7 @@ class Account extends Controller
 
     public function Home()
     {
-        $this->view('home\index');
+        $this->view('home/index');
     }
     public function RegisterUser()
     {
@@ -87,17 +87,19 @@ class Account extends Controller
         if($userEmail->num_rows > 0) {
             echo "You have been successful connected!";
             $userEmail->close();
-            //$this->view('home\index');
-            //$location= 'http://localhost:82/AdwiserBST/public/home/index';
-            //header("Location: " . $location);
+            //$this->view->render('home\index');
+
             //exit();
-            $this->Home();
+            $conn->close();
+            //$this->Home();
+            $location= 'home/index';
+            header("location: ../" . $location);
+
         }
         else{
             echo "Incorrect email or password!";
             $userEmail->close();
         }
-
         $conn->close();
     }
 }

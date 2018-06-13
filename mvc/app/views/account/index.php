@@ -24,7 +24,7 @@ session_start();
     <input  class ="login-data" type="password" id ="password" placeholder="password" >
     <input  class="submit-btn" type="submit" id = "submit-login" value="Submit" onClick="Login()">
 </div>
-<div class ="register" id = "register-form" method = "post" action = "index/home.php">
+<div class ="register" id = "register-form" method = "post" action = "account/Login">
     <form><input  class ="user-data" type="text" id="firstname" placeholder="FirstName" autofocus required />
         <input  class ="user-data" type="text" id="lastname" placeholder="LastName" required />
         <input  class ="user-data" type="email"  id="register-email" placeholder="E-mail" required />
@@ -87,7 +87,7 @@ session_start();
         xmlhttp.open("POST", "http://localhost:82/AgLr/mvc/public/account/Login", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
-            //alert(xmlhttp.response);
+            location.replace(xmlhttp.responseURL);//alert(xmlhttp.response);
         }
         xmlhttp.send("user=" + JSON.stringify(user));
 

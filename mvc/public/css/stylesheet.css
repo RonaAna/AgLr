@@ -273,6 +273,16 @@ input[type="submit"]:active {
 		margin-bottom: 175px !important;
 	}
 }
+@media only screen and (min-device-width: 752px)
+	and (max-device-width: 637px)
+	{
+	#harta {
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
+	}
+}
 .words {
 	color: white;
 font-size: xx-large;

@@ -26,19 +26,28 @@ class Home extends Controller
             die("Connection failed: " . $conn->connect_error);
         }
 
-        //echo "Connected successfully. ";
-        $allFields = $conn->prepare("SELECT * FROM fields f join usersfields uf on f.id = uf.fieldID join users u on uf.userid = u.id where Email = ?");
-        $email = 'ana@a.com';
-        $allFields->bind_param('s', $email);
-        $allFields->execute();
-        $allFields->store_result();
-        if($allFields->num_rows>0) {
-            print_r("Pizza is comming!");
-            $allFields->close();
+        $fields = Array();
+        $sql = "SELECT * FROM fields f join usersfields uf on f.id = uf.fieldID join users u on uf.userid = u.id where Email = 'ana@a.com'";
+        $result = $conn->query($sql);
+        while($row = $result->fetch_row())
+        {
+            $field = $this->model("Field");
+            $field->FieldId = $row[0];
+            $field->FieldName = $row[1];
+            $field->RegisterNumber = $row[2];
+            $field->Dimensions = $row[3];
+            $field->Zone = $row[4];
+            $field->Address = $row[5];
+            $field->Latitude = $row[6];
+            $field->Longitude = $row[7];
+            $field->ClimaticChars = $row[8];
+            $field->LandType = $row[9];
+            $field->Value = $row[10];
+
+            array_push($fields, $field);
+
         }
-        else{
-            $allFields->close();
-        }
+        echo json_encode($fields);
         $conn->close();
     }
 public function AddField()

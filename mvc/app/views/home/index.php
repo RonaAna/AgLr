@@ -20,45 +20,7 @@
 			<th></th>
             <th></th>
         </tr>
-		<tr>
-			<td><div>Teren bunici</div></td>
-			<td>
-				<button class="edit-button" type="button">
-					Edit
-				</button>
-			</td>
-			<td>
-				<button class="trash-button" type="button">
-					<img src ="../../public/Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
-				</button>
-			</td>
-		</tr>
-		<tr>
-			<td><div> Padure de brazi</div></td>
-			<td>
-				<button class="edit-button" type="button">
-					Edit
-				</button>
-			</td>
-			<td>
-				<button class="trash-button" type="button">
-					<img src ="../../public/Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
-				</button>
-			</td>
-		</tr>
-		<tr>
-			<td><div>Teren agricol de la Margineni</div></td>
-			<td>
-				<button class="edit-button" type="button">
-					Edit
-				</button>
-			</td>
-			<td>
-				<button class="trash-button" type="button">
-					<img src ="../../public/Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
-				</button>
-			</td>
-		</tr>
+
 	</table>
 
 	<div class = "words"> If you have informations about other lands you own, you can make a data import here!</div>
@@ -133,6 +95,39 @@ Mentions:
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
             console.log(xmlhttp.response);
+            var fields = JSON.parse(xmlhttp.response);
+            var i = 0;
+            for(i in fields) {
+                var table = document.getElementById("t01");
+                var row = table.insertRow(table.rows.length);
+                var attribute = document.createAttribute("FieldId");
+                attribute.value = fields[i].FieldId;
+                row.setAttributeNode(attribute);
+                var attribute2 = document.createAttribute("OnClick");
+                attribute2.value = "showInfo(this)";
+                row.setAttributeNode(attribute2);
+                var cell = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell2.innerHTML = "<button class=\"edit-button\" type=\"button\">" +
+                    "Edit" +
+                    "</button>"
+                var cell3 = row.insertCell(2);
+                cell3.innerHTML = "<button class=\"trash-button\" type=\"button\">" +
+                    "<img src =\"../Images/trash.png\" style=\" width:10px; height:15px\" alt=\"Delete\"/>Delete" +
+                    "</button>"
+
+                var row2 = table.insertRow(table.rows.length);
+                var row2Cell = row2.insertCell(0);
+                row2Cell.innerHTML = fields[i].Address;
+                var attr = document.createAttribute("id");
+                var attr2 = document.createAttribute("style");
+                attr.value = "infoToShow-"+fields[i].FieldId;
+                attr2.value = "display: none";
+                row2.setAttributeNode(attr);
+                row2.setAttributeNode(attr2);
+                cell.innerHTML = "<div>" + fields[i].FieldName + "</div>";
+                console.log(fields[i]);
+            }
         }
         xmlhttp.send();
     }
@@ -160,6 +155,21 @@ Mentions:
         xmlhttp.send('field=' + JSON.stringify(field));
     }
     AddField();
+    function showInfo(data)
+    {
+        var idToShow = data.getAttribute("fieldId");
+        var tr = document.getElementById("infoToShow-"+idToShow);
+        var styleAttribute = tr.getAttribute("style");
+        if(styleAttribute !== null)
+        {
+            tr.removeAttribute("style");
+        }
+        else{
+            var attr = document.createAttribute("style");
+            attr.value= "display: none";
+            tr.setAttributeNode(attr);
+        }
+    }
     function EditField()
     {
         var field = {
