@@ -9,9 +9,9 @@
 <html lang="en">
 <head>
 	<title> Main Page </title>
-	<link rel="stylesheet" href="../css/stylesheet.css" type="text/css">
+	<link rel="stylesheet" href="../../public/css/stylesheet.css" type="text/css">
 </head>
-<body style="background-image:url('../Images/back.jpg');">
+<body style="background-image:url('../../public/Images/back.jpg');">
 	<div class = "words" id="phrase1"> These are the fields above for whom you have rigths!</div>
 
 	<table id = "t01">
@@ -22,6 +22,11 @@
 		<tr>
 			<td><div>Teren bunici</div></td>
 			<td>
+				<button class="edit-button" type="button">
+					Edit
+				</button>
+			</td>
+			<td>
 				<button class="trash-button" type="button">
 					<img src ="../Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
 				</button>
@@ -30,6 +35,11 @@
 		<tr>
 			<td><div> Padure de brazi</div></td>
 			<td>
+				<button class="edit-button" type="button">
+					Edit
+				</button>
+			</td>
+			<td>
 				<button class="trash-button" type="button">
 					<img src ="../Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
 				</button>
@@ -37,6 +47,11 @@
 		</tr>
 		<tr>
 			<td><div>Teren agricol de la Margineni</div></td>
+			<td>
+				<button class="edit-button" type="button">
+					Edit
+				</button>
+			</td>
 			<td>
 				<button class="trash-button" type="button">
 					<img src ="../Images/trash.png" style=" width:10px; height:15px" alt="Delete"/>Delete
@@ -113,7 +128,7 @@ Mentions:
 <script>
     function RetrieveFields() {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "http://localhost:82/AdwiserBST/public/home/GetFields", true);
+        xmlhttp.open("GET", "http://localhost:80/AdwiserBST/public/home/GetFields", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
             console.log(xmlhttp.response);
@@ -136,7 +151,7 @@ Mentions:
             Value : document.getElementById("landValue").value
         }
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:82/AdwiserBST/public/home/AddField", true);
+        xmlhttp.open("POST", "http://localhost:80/AdwiserBST/public/home/AddField", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
             console.log(xmlhttp.response);
@@ -144,6 +159,29 @@ Mentions:
         xmlhttp.send('field=' + JSON.stringify(field));
     }
     AddField();
+    function EditField()
+    {
+        var field = {
+            FieldName : document.getElementById("fieldname").value,
+            RegisterNumber :document.getElementById("registrationNr").value,
+            Dimensions : document.getElementById("dimensions").value,
+            Zone : document.getElementById("zone").value,
+            Address :document.getElementById("address").value,
+            Latitude : document.getElementById("latitude").value,
+            Longitude : document.getElementById("longitude").value,
+            Climatics : document.getElementById("pedoclimatic").value,
+            LandType : document.getElementById("landType").value,
+            Value : document.getElementById("landValue").value
+        }
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "http://localhost:80/AdwiserBST/public/home/EditField", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.onload = function(){
+            console.log(xmlhttp.response);
+        }
+        xmlhttp.send('field=' + JSON.stringify(field));
+    }
+    EditField();
 
 
 </script>

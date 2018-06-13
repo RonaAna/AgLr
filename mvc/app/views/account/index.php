@@ -41,7 +41,7 @@ session_start();
     function test()
     {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:82/AdwiserBST/public/home/PostTest", true);
+        xmlhttp.open("POST", "http://localhost:C/public/home/PostTest", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
             debugger;
@@ -61,7 +61,7 @@ session_start();
             RetypedPassword : document.getElementById('password2').value
         }
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:82/AdwiserBST/public/account/RegisterUser", true);
+        xmlhttp.open("POST", "http://localhost:80/AdwiserBST/public/account/RegisterUser", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
             alert(xmlhttp.response);
@@ -84,7 +84,7 @@ session_start();
             Password : document.getElementById('password').value,
         }
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:82/AdwiserBST/public/account/Login", true);
+        xmlhttp.open("POST", "http://localhost:80/AdwiserBST/public/account/Login", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
             //alert(xmlhttp.response);

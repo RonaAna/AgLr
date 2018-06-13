@@ -71,6 +71,36 @@ public function AddField()
     $conn->close();
 }
 
+public function EditField()
+{
+    $field = json_decode($_POST['field']);
+
+    $servername = "localhost";
+    $username = "root";
+    $dbname = "aglr";
+// Create connection
+    $conn = new mysqli($servername, $username, null ,$dbname);
+
+// Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    //echo "Connected successfully. ";
+    $editField = $conn->prepare("UPDATE fields set (FieldName = ?, RegisterNumber = ?, Dimensions = ?, Zone = ?, Address = ?, Latitude = ?, Longitude = ?, ClimaticChars = ?, LandType = ?, Value = ?) WHERE Id = 1");
+    $editField->bind_param('sisssddssd',$field->FieldName, $field->RegisterNumber,$field->Dimensions,$field->Zone,$field->Address,$field->Latitude ,$field->Longitude,$field->Climatics, $field->LandType, $field->Value);
+    $editField->execute();
+    $editField->store_result();
+    if($editField == false) {
+        print_r($conn->error);
+        $editField->close();
+        return;
+    }
+    else{
+        $editField->close();
+        echo "The insertion was awesome!";}
+    $conn->close();
+}
+
 
     public function PostTest()
     {
