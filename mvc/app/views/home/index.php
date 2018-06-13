@@ -219,7 +219,22 @@ Data of interest:
             LandType : document.getElementById("landType").value,
             Value : document.getElementById("landValue").value
         }
+<<<<<<< HEAD
 
+=======
+		
+		var form = document.getElementById("add-field-form");
+        var editBtn = document.getElementsByClassName("edit-button");
+debugger;
+
+var i=0 ;
+for(i in editBtn){
+        editBtn[i].addEventListener('click', function() {
+        	form.classList.remove('hide');
+        });
+        
+}
+>>>>>>> bf2898166786a617ffc7cdb327aa23fc277f7b00
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("POST", "http://localhost:82/AgLr/mvc/public/home/EditField", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
