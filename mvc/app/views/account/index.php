@@ -32,8 +32,8 @@ session_start();
         <input  class ="user-data" type="password" id="password2" placeholder="Retype password" onfocusout="RetypePasswd()" required />
 
         <input class="submit-btn" type="button" id="register-btn" value="Sign me up" onClick="SignUp()" />
-        <p>
-            Already a member? <a href="login.php">SignIn</a>
+        <p class="words">
+            Already a member? <a  style = "color: #f1f1c1;" href="index">SignIn!</a>
         </p>
     </form></div>
 <script>

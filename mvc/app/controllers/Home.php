@@ -14,7 +14,6 @@ class Home extends Controller
 
     }
 
-<<<<<<< HEAD
     public function GetField($fieldId)
     {
         $servername = "localhost";
@@ -51,11 +50,9 @@ class Home extends Controller
         echo json_encode($field);
         $conn->close();
 
-=======
     public function Map()
     {
         $this->view('home\map');
->>>>>>> bf2898166786a617ffc7cdb327aa23fc277f7b00
     }
 
     public function GetFields()
@@ -91,13 +88,12 @@ class Home extends Controller
             $field->Value = $row[10];
 
             array_push($fields, $field);
+
         }
         echo json_encode($fields);
         $conn->close();
     }
 
-<<<<<<< HEAD
-=======
     public function Export(){
         $servername = "localhost";
         $username = "root";
@@ -191,7 +187,6 @@ class Home extends Controller
         return $data;
     }
 
->>>>>>> bf2898166786a617ffc7cdb327aa23fc277f7b00
 public function AddField()
 {
     $field = json_decode($_POST['field']);

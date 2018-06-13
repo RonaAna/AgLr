@@ -93,7 +93,6 @@ class Account extends Controller
             $location= 'home/index';
             header("location: ../" . $location);
             
-            $this->Home();
         }
         else{
             echo "Incorrect email or password!";
