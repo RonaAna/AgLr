@@ -20,7 +20,6 @@
 			<th></th>
             <th></th>
         </tr>
-
 	</table>
 
 	<div class = "words"> If you have informations about other lands you own, you can make a data import here!</div>
@@ -76,10 +75,7 @@ Value:
 Data of interest:
 			<input type="text" id="interests" placeholder="crossed by the river" required />
 		</div>
-		<div class = "fields">
-Mentions:
-		<textarea  id="mentions" placeholder="Mentions: "></textarea><br>
-		</div>
+		<div><input class="submit-btn" type="submit" id="saveEdit-btn" value="saveEdit"/></div>
 	</div>
 
 	<form id = "owner">
@@ -88,7 +84,8 @@ Mentions:
   		<input type="radio" name="owner" value="Farm"> Farm
 	</form>
 	<div><input class="submit-btn" type="submit" id="Export-btn" value="Export"/></div>
-<script>
+<script type="text/javascript">
+
     function RetrieveFields() {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", "http://localhost:82/AgLr/mvc/public/home/GetFields", true);
@@ -108,7 +105,7 @@ Mentions:
                 row.setAttributeNode(attribute2);
                 var cell = row.insertCell(0);
                 var cell2 = row.insertCell(1);
-                cell2.innerHTML = "<button class=\"edit-button\" type=\"button\">" +
+                cell2.innerHTML = "<button class=\"edit-button\" type=\"button\" fieldId = "+fields[i].FieldId+">" +
                     "Edit" +
                     "</button>"
                 var cell3 = row.insertCell(2);
@@ -118,7 +115,7 @@ Mentions:
 
                 var row2 = table.insertRow(table.rows.length);
                 var row2Cell = row2.insertCell(0);
-                row2Cell.innerHTML = fields[i].Address;
+                row2Cell.innerHTML = "<pre> "+ JSON.stringify(fields[i], null, 2) +"  </pre>";
                 var attr = document.createAttribute("id");
                 var attr2 = document.createAttribute("style");
                 attr.value = "infoToShow-"+fields[i].FieldId;
@@ -128,9 +125,47 @@ Mentions:
                 cell.innerHTML = "<div>" + fields[i].FieldName + "</div>";
                 console.log(fields[i]);
             }
+
+        var form = document.getElementById("add-field-form");
+        var editBtn = document.getElementsByClassName("edit-button");
+        debugger;
+
+        var i=0 ;
+        for(i; i<editBtn.length; i++){
+                editBtn[i].addEventListener('click', function() {
+                    form.classList.remove('hide');
+                    var fieldId = this.getAttribute("fieldId");
+                    var foundField = fields.filter(filterByID, fieldId);
+                    console.log(foundField);
+                    document.getElementById("fieldname").value = fields[0].FieldName;
+                    document.getElementById("registrationNr").value = fields[0].RegisterNumber;
+                    document.getElementById("dimensions").value = fields[0].Dimensions;
+                    document.getElementById("zone").value = fields[0].Zone;
+                    document.getElementById("address").value = fields[0].Address;
+                    document.getElementById("latitude").value = fields[0].Latitude;
+                    document.getElementById("longitude").value = fields[0].Longitude;
+                    document.getElementById("pedoclimatic").value = fields[0].Climatics;
+                    document.getElementById("landType").value = fields[0].LandType;
+                    document.getElementById("landValue").value = fields[0].Value;
+
+                    //var saveButton = doc.getbyid (saveedit)
+                    //add fieldId as attribute
+                });
+            }
         }
+    
         xmlhttp.send();
+
     }
+
+    function filterByID(item, idToCompare) {
+  if (item.FieldId === idToCompare && item.id !== 0) {
+    return item;
+  }
+  return item; 
+}
+
+
     RetrieveFields();
     function AddField()
     {
@@ -185,17 +220,6 @@ Mentions:
             Value : document.getElementById("landValue").value
         }
 
-        var form = document.getElementById("add-field-form");
-        var editBtn = document.getElementsByClassName("edit-button");
-debugger;
-
-var i=0 ;
-for(i in editBtn){
-        editBtn[i].addEventListener('click', function() {
-        	form.classList.remove('hide');
-        });
-        
-}
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("POST", "http://localhost:82/AgLr/mvc/public/home/EditField", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

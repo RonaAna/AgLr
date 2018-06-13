@@ -87,19 +87,19 @@ class Account extends Controller
         if($userEmail->num_rows > 0) {
             echo "You have been successful connected!";
             $userEmail->close();
-            //$this->view->render('home\index');
 
-            //exit();
             $conn->close();
             //$this->Home();
             $location= 'home/index';
             header("location: ../" . $location);
-
+            
+            $this->Home();
         }
         else{
             echo "Incorrect email or password!";
             $userEmail->close();
         }
+
         $conn->close();
     }
 }
