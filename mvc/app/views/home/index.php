@@ -69,7 +69,7 @@
 	</div>
 	<div class = "display-map"><img src = "../../public/Images/HartaMargineni.PNG" alt="harta" id = "harta"/></div>
 
-	<div class = "add-field" id = "add-field-form">
+	<div class = "add-field hide" id = "add-field-form">
 		<div class = "fields">
 Field Name:
 			<input type="text" id="fieldname" placeholder="Field Name" autofocus required />
@@ -174,6 +174,18 @@ Mentions:
             LandType : document.getElementById("landType").value,
             Value : document.getElementById("landValue").value
         }
+
+        var form = document.getElementById("add-field-form");
+        var editBtn = document.getElementsByClassName("edit-button");
+debugger;
+
+var i=0 ;
+for(i in editBtn){
+        editBtn[i].addEventListener('click', function() {
+        	form.classList.remove('hide');
+        });
+        
+}
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("POST", "http://localhost:82/AgLr/mvc/public/home/EditField", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
