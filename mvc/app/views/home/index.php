@@ -184,8 +184,8 @@ Mentions:
             LandType : document.getElementById("landType").value,
             Value : document.getElementById("landValue").value
         }
-
-        var form = document.getElementById("add-field-form");
+		
+		var form = document.getElementById("add-field-form");
         var editBtn = document.getElementsByClassName("edit-button");
 debugger;
 
