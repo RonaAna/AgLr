@@ -249,8 +249,33 @@ input[type="submit"]:active {
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
-
+#harta {
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
+	}
   }
+  @media only screen and (min-device-width: 768px)
+	and (max-device-width: 1024px)
+	and (orientation: portrait) {
+	#harta {
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
+	}
+}
+  @media only screen and (min-device-width: 752px)
+	and (max-device-width: 637px)
+	{
+	#harta {
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
+	}
+}
 .words {
 	color: white;
 font-size: xx-large;
@@ -259,16 +284,16 @@ margin-left: 20%;
 margin-right: 20%;
 }
 #harta {
-	width: 105%;
+	width: 100%;
 	height: 100%;
 	border: 2px solid #16a085;
 	margin: 5%;
-	margin-bottom:33%;
+	margin-bottom:50%;
 }
 .display-map {
 	width: 20%;
 	height: 30%;
-	margin: 2% 20% 2% 0;
+	margin: 2% 20% 10% 0;
 	float: right;
 	
 	

@@ -66,7 +66,7 @@
 #register-form {display: none;
 border: none;
 }
-#register-btn,.trash-button,.edit-button,#Import-btn,#Export-btn{
+#register-btn,.trash-button,.edit-button,#Import-btn,#Export-btn,#saveEdit-btn{
 	margin-right: auto;
 	margin-left: auto;
 	display:block;
@@ -99,7 +99,7 @@ input[type="submit"]:active {
 #Coordinate, #pedoclimatic,
 #registrationNr, #dimensions,
 #mentions , #landType,
-#landValue, #interests {
+#landValue, #interests, #address, #latitude, #longitude {
 	display:inline-block;
 	border: none;
 	border-radius: 5px;
@@ -256,8 +256,33 @@ input[type="submit"]:active {
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
-
+	#harta {
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
+	}
   }
+@media only screen and (min-device-width: 768px)
+	and (max-device-width: 1024px)
+	and (orientation: portrait) {
+	#harta {
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
+	}
+}
+@media only screen and (min-device-width: 752px)
+	and (max-device-width: 637px)
+	{
+	#harta {
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
+	}
+}
 .words {
 	color: white;
 font-size: xx-large;
@@ -275,8 +300,9 @@ margin-right: 20%;
 .display-map {
 	width: 20%;
 	height: 30%;
-	margin: 2% 20% 2% 0;
+	margin: 2% 20% 5% 0;
 	float: right;
-	
-	
+}
+.hide {
+	display:none;
 }

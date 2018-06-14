@@ -24,7 +24,7 @@ session_start();
     <input  class ="login-data" type="password" id ="password" placeholder="password" >
     <input  class="submit-btn" type="submit" id = "submit-login" value="Submit" onClick="Login()">
 </div>
-<div class ="register" id = "register-form" method = "post" action = "index/home.php">
+<div class ="register" id = "register-form" method = "post" action = "account/Login">
     <form><input  class ="user-data" type="text" id="firstname" placeholder="FirstName" autofocus required />
         <input  class ="user-data" type="text" id="lastname" placeholder="LastName" required />
         <input  class ="user-data" type="email"  id="register-email" placeholder="E-mail" required />
@@ -32,8 +32,8 @@ session_start();
         <input  class ="user-data" type="password" id="password2" placeholder="Retype password" onfocusout="RetypePasswd()" required />
 
         <input class="submit-btn" type="button" id="register-btn" value="Sign me up" onClick="SignUp()" />
-        <p>
-            Already a member? <a href="login.php">SignIn</a>
+        <p class="words">
+            Already a member? <a  style = "color: #f1f1c1;" href="index">SignIn!</a>
         </p>
     </form></div>
 <script>
@@ -61,7 +61,7 @@ session_start();
             RetypedPassword : document.getElementById('password2').value
         }
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:80/AdwiserBST/public/account/RegisterUser", true);
+        xmlhttp.open("POST", "http://localhost:82/AgLr/mvc/public/account/RegisterUser", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
             alert(xmlhttp.response);
@@ -84,10 +84,10 @@ session_start();
             Password : document.getElementById('password').value,
         }
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:80/AdwiserBST/public/account/Login", true);
+        xmlhttp.open("POST", "http://localhost:82/AgLr/mvc/public/account/Login", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
-            //alert(xmlhttp.response);
+            location.replace(xmlhttp.responseURL);//alert(xmlhttp.response);
         }
         xmlhttp.send("user=" + JSON.stringify(user));
 
