@@ -134,6 +134,7 @@ Data of interest:
     <div style="display: flex; justify-content: center">
         <input type="submit" class="submit-btn hide" id ="Add-button" value = "Add field"/>
     </div>
+	<div><input class="submit-btn" type="submit" id="Export-btn" value="Export"/></div>
 <script type="text/javascript">
 
     function RetrieveFields() {
@@ -216,6 +217,30 @@ Data of interest:
             submitAdd.addEventListener('click',AddField);
         });
         };
+
+        var i=0 ;
+        for(i; i<editBtn.length; i++){
+                editBtn[i].addEventListener('click', function() {
+                    form.classList.remove('hide');
+                    var fieldId = this.getAttribute("fieldId");
+                    var foundField = fields.filter(filterByID, fieldId);
+                    console.log(foundField);
+                    document.getElementById("fieldname").value = fields[0].FieldName;
+                    document.getElementById("registrationNr").value = fields[0].RegisterNumber;
+                    document.getElementById("dimensions").value = fields[0].Dimensions;
+                    document.getElementById("zone").value = fields[0].Zone;
+                    document.getElementById("address").value = fields[0].Address;
+                    document.getElementById("latitude").value = fields[0].Latitude;
+                    document.getElementById("longitude").value = fields[0].Longitude;
+                    document.getElementById("pedoclimatic").value = fields[0].Climatics;
+                    document.getElementById("landType").value = fields[0].LandType;
+                    document.getElementById("landValue").value = fields[0].Value;
+
+                    //var saveButton = doc.getbyid (saveedit)
+                    //add fieldId as attribute
+                });
+            }
+        }
     
         xmlhttp.send();
 

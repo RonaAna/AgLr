@@ -1,3 +1,5 @@
 FieldId,FieldName,RegisterNumber,Dimensions,Zone,Address,Latitude,Longitude,ClimaticChars,LandType,Value
 1,teren,1,23,acasa,"La tara",-11.07,45.8797,nisipos,arable,2000
 3,buni,1,2,acasa,"in oras",-11.07,45.8797,oil,arable,2000
+1,teren,1,3,"acasa la bunici",21000,45354,6000,arabil,land,10000.21
+3,buni,1,2,acasa,"la mama",-11.07,45.8797,oil,arable,2000
