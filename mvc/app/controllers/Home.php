@@ -49,10 +49,13 @@ class Home extends Controller
         echo json_encode($field);
         $conn->close();
     }
-	
     public function Map()
     {
-        $this->view('home\map');
+        $this->view('home/map');
+    }
+    public function MapIndex()
+    {
+        $this->view('home/mapIndex');
     }
 
     public function GetFields()

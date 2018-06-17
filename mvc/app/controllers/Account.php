@@ -9,7 +9,7 @@ class Account extends Controller
 {
     public function Index()
     {
-        echo 'rout99ng';
+        //echo 'rout99ng';
         $this->view('account\index');
     }
 
@@ -56,6 +56,7 @@ class Account extends Controller
             $insertUser->bind_param('ssss',$user->FirstName, $user->LastName, $user->Email, $passRef);
             $insertUser->execute();
             echo "User Created";
+
         }
 
         $conn->close();
