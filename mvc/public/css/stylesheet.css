@@ -1,9 +1,8 @@
 
-#menu-button {
-
+#menu-button{
 	float: right;
 }
-.menu-btn {
+.menu-btn{
 	background-color:#39ac73;
 	opacity: 0.8;
 	border: none;
@@ -17,7 +16,7 @@
 	height:50px;
 }
 
-.welcome {
+.welcome{
 	text-align:center;
 	margin-top: 100px;
 	margin-bottom: 75px;
@@ -39,7 +38,7 @@
 	font-size:20px;
 	opacity:0.7;
 }
-.user-data {
+.user-data{
 	width:220px;
 	height:40px;
 	text-align: center;
@@ -53,7 +52,7 @@
 	margin-top: 1%;
 	margin-bottom: 1%;
 }
-.submit-btn {
+.submit-btn{
 	width:220px;
 	height:40px;
 	text-align: center;
@@ -63,10 +62,11 @@
 	border: none;
 	background-color: #39ac73;
 }
-#register-form {display: none;
-border: none;
+#register-form{
+	display: none;
+	border: none;
 }
-#register-btn,.trash-button,.edit-button,#Import-btn,#Export-btn{
+#register-btn,.trash-button,.edit-button,#Import-btn,#Export-btn,#saveEdit-btn{
 	margin-right: auto;
 	margin-left: auto;
 	display:block;
@@ -76,20 +76,20 @@ border: none;
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus{
   border-bottom: 2px solid #16a085;
   color: #16a085;
   transition: 0.2s ease;
 }
 
 input[type="submit"]:hover,
-input[type="submit"]:focus {
+input[type="submit"]:focus{
   opacity: 1;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   transition: 0.1s ease;
 }
 
-input[type="submit"]:active {
+input[type="submit"]:active{
   opacity: 1;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   transition: 0.1s ease;
@@ -99,7 +99,7 @@ input[type="submit"]:active {
 #Coordinate, #pedoclimatic,
 #registrationNr, #dimensions,
 #mentions , #landType,
-#landValue, #interests {
+#landValue, #interests, #address, #latitude, #longitude{
 	display:inline-block;
 	border: none;
 	border-radius: 5px;
@@ -137,16 +137,16 @@ input[type="submit"]:active {
 	text-align: left;
 }
 
-#add-field-form {
+#add-field-form{
 	margin-top: 3%;
 	}
 
-#mentions {
+#mentions{
 	height:75px;
 	width:33%;
 	margin-right: 38%;
 }
-#Add-button {
+#Add-button{
 	margin : 0px 45%;
 }
 #owner{
@@ -157,7 +157,7 @@ input[type="submit"]:active {
 	font-size:20px;
 	color:white;
 }
-#t01 {
+#t01{
     border-collapse: collapse;
     width: 70%;
     margin:3% 15% 3% 15%;
@@ -165,52 +165,54 @@ input[type="submit"]:active {
 	opacity:0.9;
 	
 }
-#t01 td div, #t01 th div {
+#t01 td div, #t01 th div{
 	display:inline;
 	font-size:150%;
 }
-#t01 td, #t01 th {
+#t01 td, #t01 th{
     padding: 2%;
 }
-#t01 th {
+#t01 th{
 	margin-bottom:5px;
 	background-color:#39ac73;
 }
-#t01 td input[type = "text"] {width: 84%;}
-#t01 tr:nth-child(even) {
+#t01 td input[type = "text"]{
+	width: 84%;
+}
+#t01 tr:nth-child(even){
 	background-color: #f2f2f2;
 }
 
-#t01 tr:hover { 
+#t01 tr:hover{
 	background-color: #ddd;
 }
 
-#t01 th {
+#t01 th{
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
     background-color: #39ac73;
     color: white;
 }
-.trash-button {
+.trash-button{
 	display:inline-block;
 	font-size: 18px;
 	font-family: FontAwasome;
 	color:darkblue;
 }
 
-.edit-button {
+.edit-button{
 	display:inline-block;
 	font-size: 18px;
 	font-family: FontAwasome;
 	color:darkblue;
 }
 
- @media only screen and (max-width: 600px) { 
-     body { 
+@media only screen and (max-width: 600px){
+     body{
          background-color: lightblue;
      }
-	 #t01 td div, #t01 th div {
+	 #t01 td div, #t01 th div{
 		 display:inline; 
 		 font-size:150%; 
 		 text-align: center; 
@@ -221,7 +223,7 @@ input[type="submit"]:active {
 		 text-align: center; 
 		 margin-left: 20%; 
 		 margin-right: 20%; 
-	 } 
+	 }
  }
 /* ----------- iPhone 4 and 4S ----------- */
 
@@ -229,23 +231,23 @@ input[type="submit"]:active {
 @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2) {
- #harta {
-	width: 105%;
-	height: 100%;
-	border: 2px solid #16a085;
-	margin-bottom: 175px !important;
+  and (-webkit-min-device-pixel-ratio: 2){
+ 	#harta{
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
+	}
 }
-  }
 /* Portrait */
 @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: portrait) {
-	   #harta {
-	width: 105%;
-	height: 100%;
+  and (orientation: portrait){
+	   #harta{
+			width: 105%;
+			height: 100%;
 	border: 2px solid #16a085;
 	margin-bottom: 175px !important;
 	}
@@ -256,16 +258,41 @@ input[type="submit"]:active {
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
-
+	#harta {
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
+	}
   }
-.words {
-	color: white;
-font-size: xx-large;
-text-align: center;
-margin-left: 20%;
-margin-right: 20%;
+@media only screen and (min-device-width: 768px)
+	and (max-device-width: 1024px)
+	and (orientation: portrait) {
+	#harta {
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
+	}
 }
-#harta {
+@media only screen and (min-device-width: 752px)
+	and (max-device-width: 637px)
+	{
+	#harta {
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
+	}
+}
+.words{
+	color: white;
+	font-size: xx-large;
+	text-align: center;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+#harta{
 	width: 105%;
 	height: 100%;
 	border: 2px solid #16a085;
@@ -275,8 +302,9 @@ margin-right: 20%;
 .display-map {
 	width: 20%;
 	height: 30%;
-	margin: 2% 20% 2% 0;
+	margin: 2% 20% 5% 0;
 	float: right;
-	
-	
+}
+.hide {
+	display:none;
 }

@@ -9,10 +9,14 @@ class Account extends Controller
 {
     public function Index()
     {
-        echo 'rout99ng';
+        //echo 'rout99ng';
         $this->view('account\index');
     }
 
+    public function Home()
+    {
+        $this->view('home/index');
+    }
     public function RegisterUser()
     {
         $user = json_decode($_POST['user']);
@@ -52,6 +56,7 @@ class Account extends Controller
             $insertUser->bind_param('ssss',$user->FirstName, $user->LastName, $user->Email, $passRef);
             $insertUser->execute();
             echo "User Created";
+
         }
 
         $conn->close();
@@ -83,14 +88,17 @@ class Account extends Controller
         if($userEmail->num_rows > 0) {
             echo "You have been successful connected!";
             $userEmail->close();
-            //$this->view('home\index');
-            $location= 'http://localhost:82/AdwiserBST/public/home/index';
-            header("Location: " . $location);
-            exit();
+
+            $conn->close();
+            //$this->Home();
+            $location= 'home/index';
+            header("location: ../" . $location);
+            
         }
         else{
             echo "Incorrect email or password!";
             $userEmail->close();
+            header("location: ../account/index");
         }
 
         $conn->close();
