@@ -96,8 +96,146 @@ class Home extends Controller
         echo json_encode($fields);
         $conn->close();
     }
+    public function ExportAsJSON() {
+        $servername = "localhost";
+        $username = "root";
+        $dbname = "aglr";
+// Create connection
+        $conn = new mysqli($servername, $username, null ,$dbname);
 
-    public function Export(){
+// Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $fields = Array();
+        $sql = "SELECT * FROM fields f join usersfields uf on f.id = uf.fieldID join users u on uf.userid = u.id where Email = 'ana@a.com'";
+        $result = $conn->query($sql);
+        while($row = $result->fetch_row())
+        {
+            $field = $this->model("Field");
+            $field->FieldId = $row[0];
+            $field->FieldName = $row[1];
+            $field->RegisterNumber = $row[2];
+            $field->Dimensions = $row[3];
+            $field->Zone = $row[4];
+            $field->Address = $row[5];
+            $field->Latitude = $row[6];
+            $field->Longitude = $row[7];
+            $field->ClimaticChars = $row[8];
+            $field->LandType = $row[9];
+            $field->Value = $row[10];
+
+            array_push($fields, $field);
+
+        }
+
+        $file1 = fopen("D:\\Downloads\\jsonExport.json", "w");
+        fwrite($file1, json_encode($fields));
+        fclose($file1);
+        header('Content-Type: application/json');
+        header('Content-Disposition: attachment; filename=jsonExport.json');
+        header('Pragma: no-cache');
+        readfile("D:/Downloads/jsonExport.json");
+
+        $conn->close();
+    }
+
+    public function ExportAsXML() {
+        $servername = "localhost";
+        $username = "root";
+        $dbname = "aglr";
+// Create connection
+        $conn = new mysqli($servername, $username, null ,$dbname);
+
+// Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $fields = Array();
+        $sql = "SELECT * FROM fields f join usersfields uf on f.id = uf.fieldID join users u on uf.userid = u.id where Email = 'ana@a.com'";
+        $result = $conn->query($sql);
+        while($row = $result->fetch_row())
+        {
+            $field = $this->model("Field");
+            $field->FieldId = $row[0];
+            $field->FieldName = $row[1];
+            $field->RegisterNumber = $row[2];
+            $field->Dimensions = $row[3];
+            $field->Zone = $row[4];
+            $field->Address = $row[5];
+            $field->Latitude = $row[6];
+            $field->Longitude = $row[7];
+            $field->ClimaticChars = $row[8];
+            $field->LandType = $row[9];
+            $field->Value = $row[10];
+
+            array_push($fields, $field);
+
+        }
+
+        $file2 = fopen("D:\\Downloads\\xmlExport.xml", "w");
+        require_once '../app/XmlHelper.php';
+        fwrite($file2, XmlSerializer::toXml($fields, "Fields"));
+        fclose($file2);
+        header('Content-Type: application/xml');
+        header('Content-Disposition: attachment; filename=xmlExport.xml');
+        header('Pragma: no-cache');
+        readfile("D:/Downloads/xmlExport.xml");
+        
+        $conn->close();
+    }
+
+    public function ExportAsCSV(){
+        $servername = "localhost";
+        $username = "root";
+        $dbname = "aglr";
+// Create connection
+        $conn = new mysqli($servername, $username, null ,$dbname);
+
+// Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $fields = Array();
+        $sql = "SELECT * FROM fields f join usersfields uf on f.id = uf.fieldID join users u on uf.userid = u.id where Email = 'ana@a.com'";
+        $result = $conn->query($sql);
+        while($row = $result->fetch_row())
+        {
+            $field = $this->model("Field");
+            $field->FieldId = $row[0];
+            $field->FieldName = $row[1];
+            $field->RegisterNumber = $row[2];
+            $field->Dimensions = $row[3];
+            $field->Zone = $row[4];
+            $field->Address = $row[5];
+            $field->Latitude = $row[6];
+            $field->Longitude = $row[7];
+            $field->ClimaticChars = $row[8];
+            $field->LandType = $row[9];
+            $field->Value = $row[10];
+
+            array_push($fields, $field);
+
+        }
+        $file3 = fopen("D:\\Downloads\\csvExport.csv", "w");
+        fputcsv($file3, array_keys(get_object_vars($fields[0])));
+        foreach ($fields as $flds) {
+
+                $flds = (array) $flds;
+            fputcsv($file3, $flds);
+        }
+        fclose($file3);
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachment; filename=csvExport.csv');
+        header('Pragma: no-cache');
+        readfile("D:/Downloads/csvExport.csv");
+
+    }
+
+
+    /*public function Export(){
         $servername = "localhost";
         $username = "root";
         $dbname = "aglr";
@@ -150,7 +288,7 @@ class Home extends Controller
 
         echo json_encode($fields);
         $conn->close();
-    }
+    }*/
 
     /*public function Import()
     {
