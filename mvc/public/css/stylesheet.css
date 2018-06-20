@@ -129,13 +129,17 @@ input[type="submit"]:active{
 #t01 td div{
 	margin-top: 1%;
 	margin-bottom: 1%;
-	margin-right: auto;
+	margin-right: 10%;
 	margin-left: 10%;
 	border: none;
 	border-radius: 7px;
 	opacity:0.9;
 	text-align: left;
 }
+#t01 td {width: 200px;}
+li {width:250px;}
+ul { width:260px;}
+
 
 #add-field-form{
 	margin-top: 3%;

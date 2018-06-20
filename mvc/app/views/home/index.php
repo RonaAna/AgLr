@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../../public/css/stylesheet.css" type="text/css">
 
 </head>
-<body style="background-image:url('../../public/Images/back.jpg');">
+<body style="background-image:url('../../public/Images/back.jpg');" >
 <div class = "words" id="phrase1"> These are the fields for whom you have rigths!</div>
 
 <table id = "t01" onfocus="">
@@ -65,33 +65,6 @@
 
 </div>
 <div id="map" style="width: 350px; height: 350px;border: 2px solid #16a085;"></div>
-<!--	<div id="map"></div>
-    <script>
-        var marker;
-        function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 13,
-                center: {lat: 47.1740186, lng: 27.5728553}
-            });
-
-        marker = new google.maps.Marker({
-            map: map,
-            draggable: true,
-            animation: google.maps.Animation.DROP,
-            position: {lat: 47.17402, lng: 27.572856},
-            title: 'Your precious land'
-        });
-        marker.addListener('click', toggleBounce);
-        }
-        function toggleBounce() {
-            if (marker.getAnimation() !== null) {
-                marker.setAnimation(null);
-            } else {
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-            }
-        }
-    </script><script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV_6VE4X-HjAYqLgYi1S9Qv4BixerKAwc&callback=initMap"></script>-->
-
 
 <div class = "add-field hide" id = "add-field-form">
     <div class = "fields">
@@ -150,34 +123,7 @@
     <input type="submit" class="submit-btn hide" id ="Add-button" value = "Add field"/>
 </div>
 
-<script>
-    var marker;
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 13,
-            center: {lat: 47.1740186, lng: 27.5728553}
-        });
-
-        marker = new google.maps.Marker({
-            map: map,
-            draggable: true,
-            animation: google.maps.Animation.DROP,
-            position: {lat: 47.17402, lng: 27.572856},
-            title: 'Your precious land'
-        });
-        marker.addListener('click', toggleBounce);
-    }
-    function toggleBounce() {
-        if (marker.getAnimation() !== null) {
-            marker.setAnimation(null);
-        } else {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
-    }
-</script><script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV_6VE4X-HjAYqLgYi1S9Qv4BixerKAwc&callback=initMap"></script>
 <script type="text/javascript">
-
-
     function BetterImport()
     {
         var file = document.getElementById("Importfile").value;
@@ -211,11 +157,11 @@
             for (var index = 0,rows; rows = tableBody.rows[i];i++) {
                 rows.removeChild(index);
             }*/
-            for (var index = 1; index< tableBody.children.length; index++) {
+            /*for (var index = 1; index < tableBody.children.length; index++) {
                 tr.remove();
                 //console.log(tableBody.children[index].tagName);
                 //tableBody.children[index].remove();
-            }
+            }*/
             for(i in fields) {
                 var row = table.insertRow(table.rows.length);
                 var attribute = document.createAttribute("FieldId");
@@ -245,15 +191,17 @@
                     fields[i].Latitude + ", " + fields[i].Longitude + "," + fields[i].ClimaticChars + "," +
                     fields[i].LandType + "," + fields[i].Value +
                     "</pre>";*/
-                var innerHtml = '<ul>';
+                var innerHtml = '<ul">';
                 for(var prop in fields[i])
                 {
                     if (prop !== 'FieldId') {
-                        innerHtml += '<li><b>'+ prop + '</b>:' + fields[i][prop] + '</li>'}
+                        innerHtml += "<li><b>"+ prop + '</b>:' + fields[i][prop] + '</li>'
+                    }
                 }
                 innerHtml += '</ul>';
                 row2Cell.innerHTML = innerHtml;
-
+                /* var row2Cell2= row2.insertCell(1);
+                 row2Cell2.innerHTML = "<div id=\"map\" style=\"width: 350px; height: 350px;border: 2px solid #16a085;\"></div>"*/
                 var attr = document.createAttribute("id");
                 var attr2 = document.createAttribute("style");
                 attr.value = "infoToShow-"+fields[i].FieldId;
@@ -261,11 +209,11 @@
                 row2.setAttributeNode(attr);
                 row2.setAttributeNode(attr2);
                 cell.innerHTML = "<div>" + fields[i].FieldName + "</div>";
-                var row2Cell2 = row2.insertCell(1);
-                row2Cell2.innerHTML = "<div class =\"map\" style =\" width: 387px; height: 350px;border: 2px solid #16a085; display:block; margin-left:auto; margin-right:auto;\" " +
-                    "></div>"
-
+                /*var row2Cell2 = row2.insertCell(1);
+                row2Cell2.innerHTML ="<div id =\"map\" style =\" width: 100%; height: 300px; display:block; opacity:1; \" " +"></div>"*/
                 console.log(fields[i]);
+
+
             }
 
             var form = document.getElementById("add-field-form");
@@ -296,7 +244,8 @@
                     document.getElementById("landValue").value = fields[elementid].Value;
                     submitEdit.addEventListener('click',function() {
                         EditField(fieldId);
-                        location.reload();
+                        DisplayMap();
+                        //location.reload();
                     });
                     //}}
                 });
@@ -314,6 +263,7 @@
                 });
 
             });
+
             var j=0 ;
             for(j; j < deleteBtn.length; j++){
                 deleteBtn[j].addEventListener('click', function() {
@@ -337,7 +287,6 @@
           debugger;
   return item;
 }*/
-
 
     RetrieveFields();
     function AddField() {
@@ -509,15 +458,67 @@
             RetrieveFields();
         }}
     function DisplayMap() {
+
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "http://localhost:82/AgLr/mvc/public/home/Map", true);
+        xmlhttp.open("GET", "http://localhost:82/AgLr/mvc/public/home/GetFields", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
-            xmlhttp.response;
+            var fields = JSON.parse(xmlhttp.response);
+
+            for( var field in fields){
+                var latitude = fields[field].Latitude;
+                var longitude = fields[field].Longitude;
+                debugger;
+                var location = new google.maps.LatLng(latitude, longitude);
+                debugger;
+                marker.setPosition(location);
+                debugger;
+            }
 
         }
         xmlhttp.send();
     }
+
+    var location;
+    var marker;
+    var map;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: {lat: 47.1740186, lng: 27.5728553}
+        });
+        marker = new google.maps.Marker({
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: {lat: 47.1740186, lng: 27.5728553},
+            title: 'Your precious land'
+        });
+        marker.addListener('click', toggleBounce);
+        map.addListener('center_changed', function() {
+            // 3 seconds after the center of the map has changed, pan back to the
+            // marker.
+            window.setTimeout(function() {
+                map.panTo(marker.getPosition());
+            }, 3000);
+        });
+
+        marker.addListener('click', function() {
+            map.setZoom(8);
+            map.setCenter(marker.getPosition());
+        });
+
+
+    }
+    function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    }
 </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV_6VE4X-HjAYqLgYi1S9Qv4BixerKAwc&callback=initMap"></script>
 </body>
 </html>
