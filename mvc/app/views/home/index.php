@@ -149,12 +149,11 @@ Data of interest:
     function BetterImport()
     {
         var file = document.getElementById("Importfile").value;
-
+		
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("POST", "http://localhost:82/AgLr/mvc/public/home/Import", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
-            debugger;
             console.log(xmlhttp.response);
         }
         xmlhttp.send('file=' + file.replace(/C:\\fakepath\\/i, ''));
@@ -324,8 +323,7 @@ Data of interest:
         }
     }
 
-    function ValidateFields(field)
-    {
+    function ValidateFields(field) {
         var isValid = true;
         if(field.FieldName === "" && typeof field.FieldName !== "string" && isValid == true) {
             isValid = false;
@@ -409,9 +407,6 @@ function RevealImport() {
     formImport.classList.remove("hide");
 }
 
-function Tst(){
-
-}
 
     function ExportJSON(){
         var xmlhttp = new XMLHttpRequest();
@@ -440,6 +435,7 @@ function Tst(){
         xmlhttp.open("GET", "http://localhost:82/AgLr/mvc/public/home/ExportAsCSV", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
+            debugger;
             xmlhttp.response;
         }
         xmlhttp.send();

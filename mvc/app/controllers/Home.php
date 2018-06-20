@@ -100,10 +100,10 @@ class Home extends Controller
         $servername = "localhost";
         $username = "root";
         $dbname = "aglr";
-// Create connection
+        // Create connection
         $conn = new mysqli($servername, $username, null ,$dbname);
 
-// Check connection
+        // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
@@ -132,10 +132,10 @@ class Home extends Controller
         $file1 = fopen("D:\\Downloads\\jsonExport.json", "w");
         fwrite($file1, json_encode($fields));
         fclose($file1);
-        header('Content-Type: application/json');
+        /*header('Content-Type: application/json');
         header('Content-Disposition: attachment; filename=jsonExport.json');
         header('Pragma: no-cache');
-        readfile("D:/Downloads/jsonExport.json");
+        readfile("D:/Downloads/jsonExport.json");*/
 
         $conn->close();
     }
@@ -231,7 +231,8 @@ class Home extends Controller
         header('Content-Disposition: attachment; filename=csvExport.csv');
         header('Pragma: no-cache');
         readfile("D:/Downloads/csvExport.csv");
-
+		
+		$conn->close();
     }
 
 
