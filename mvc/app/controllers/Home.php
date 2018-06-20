@@ -51,13 +51,16 @@ class Home extends Controller
     }
     public function Map()
     {
-        $this->view('home/map');
+        $this->view('home/index');
     }
     public function MapIndex()
     {
         $this->view('home/mapIndex');
     }
-
+    public function NewMap()
+    {
+        $this->view('home/newMap');
+    }
     public function GetFields()
     {
         $servername = "localhost";

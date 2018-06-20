@@ -6,11 +6,11 @@
 	background-color:#39ac73;
 	opacity: 0.8;
 	border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 20px;
 	border-radius: 12px;
 	width:100px;
 	height:50px;
@@ -20,15 +20,15 @@
 	text-align:center;
 	margin-top: 100px;
 	margin-bottom: 75px;
-    display: inline-block;
-    width: 100%;
+	display: inline-block;
+	width: 100%;
 	font-size:300%;
 	color: white;
 }
 .login{
-    text-align: center;
+	text-align: center;
 }
-#user, 
+#user,
 #password{
 	width:220px;
 	height:40px;
@@ -77,25 +77,25 @@
 
 input[type="text"]:focus,
 input[type="password"]:focus{
-  border-bottom: 2px solid #16a085;
-  color: #16a085;
-  transition: 0.2s ease;
+	border-bottom: 2px solid #16a085;
+	color: #16a085;
+	transition: 0.2s ease;
 }
 
 input[type="submit"]:hover,
 input[type="submit"]:focus{
-  opacity: 1;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  transition: 0.1s ease;
+	opacity: 1;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+	transition: 0.1s ease;
 }
 
 input[type="submit"]:active{
-  opacity: 1;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  transition: 0.1s ease;
+	opacity: 1;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+	transition: 0.1s ease;
 }
 
-#fieldname,#zone, 
+#fieldname,#zone,
 #Coordinate, #pedoclimatic,
 #registrationNr, #dimensions,
 #mentions , #landType,
@@ -124,7 +124,7 @@ input[type="submit"]:active{
 	opacity:1;
 	color:white;
 	width:60%;
-	
+
 }
 #t01 td div{
 	margin-top: 1%;
@@ -139,7 +139,7 @@ input[type="submit"]:active{
 
 #add-field-form{
 	margin-top: 3%;
-	}
+}
 
 #mentions{
 	height:75px;
@@ -158,19 +158,19 @@ input[type="submit"]:active{
 	color:white;
 }
 #t01{
-    border-collapse: collapse;
-    width: 70%;
-    margin:3% 15% 3% 15%;
-    background-color: #f1f1c1;
+	border-collapse: collapse;
+	width: 70%;
+	margin:3% 15% 3% 15%;
+	background-color: #f1f1c1;
 	opacity:0.9;
-	
+
 }
 #t01 td div, #t01 th div{
 	display:inline;
 	font-size:150%;
 }
 #t01 td, #t01 th{
-    padding: 2%;
+	padding: 2%;
 }
 #t01 th{
 	margin-bottom:5px;
@@ -188,51 +188,51 @@ input[type="submit"]:active{
 }
 
 #t01 th{
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #39ac73;
-    color: white;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #39ac73;
+	color: white;
 }
 .trash-button{
-	display:inline-block;
+	display:block;
 	font-size: 18px;
 	font-family: FontAwasome;
 	color:darkblue;
 }
 
 .edit-button{
-	display:inline-block;
+	display:block;
 	font-size: 18px;
 	font-family: FontAwasome;
 	color:darkblue;
 }
 
 @media only screen and (max-width: 600px){
-     body{
-         background-color: lightblue;
-     }
-	 #t01 td div, #t01 th div{
-		 display:inline; 
-		 font-size:150%; 
-		 text-align: center; 
-	 } 
+	body{
+		background-color: lightblue;
+	}
+	#t01 td div, #t01 th div{
+		display:inline;
+		font-size:150%;
+		text-align: center;
+	}
 	.words,#mentions{
-		 color: blue;
-		 font-size: xx-small; 
-		 text-align: center; 
-		 margin-left: 20%; 
-		 margin-right: 20%; 
-	 }
- }
+		color: blue;
+		font-size: xx-small;
+		text-align: center;
+		margin-left: 20%;
+		margin-right: 20%;
+	}
+}
 /* ----------- iPhone 4 and 4S ----------- */
 
 /* Portrait and Landscape */
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2){
- 	#harta{
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2){
+	#harta{
 		width: 105%;
 		height: 100%;
 		border: 2px solid #16a085;
@@ -240,34 +240,34 @@ input[type="submit"]:active{
 	}
 }
 /* Portrait */
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: portrait){
-	   #harta{
-			width: 105%;
-			height: 100%;
-	border: 2px solid #16a085;
-	margin-bottom: 175px !important;
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait){
+	#harta{
+		width: 105%;
+		height: 100%;
+		border: 2px solid #16a085;
+		margin-bottom: 175px !important;
 	}
-  }
+}
 /* Landscape */
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) {
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
 	#harta {
 		width: 105%;
 		height: 100%;
 		border: 2px solid #16a085;
 		margin-bottom: 175px !important;
 	}
-  }
+}
 @media only screen and (min-device-width: 768px)
-	and (max-device-width: 1024px)
-	and (orientation: portrait) {
+and (max-device-width: 1024px)
+and (orientation: portrait) {
 	#harta {
 		width: 105%;
 		height: 100%;
@@ -276,8 +276,8 @@ input[type="submit"]:active{
 	}
 }
 @media only screen and (min-device-width: 752px)
-	and (max-device-width: 637px)
-	{
+and (max-device-width: 637px)
+{
 	#harta {
 		width: 105%;
 		height: 100%;
