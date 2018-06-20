@@ -50,7 +50,13 @@
         </form>
 
     </div>
-    <div><input class="submit-btn" type="submit" id="Export-btn" value="Export"onClick="Export()"/></div>
+     <div class = "words"> You can Export your data from here!</div>
+    
+    <div style="display: flex; justify-content: center; margin: 5px"><input class="submit-btn" type="submit" id="ExportCSV-btn" value="Download as CSV"onClick="ExportCSV()"/></div>
+    
+    <div style="display: flex; justify-content: center; margin: 5px"><input class="submit-btn" type="submit" id="ExportXML-btn" value="Download as XML"onClick="ExportXML()"/></div>
+    
+    <div style="display: flex; justify-content: center; margin: 5px"><input class="submit-btn" type="submit" id="ExportJSON-btn" value="Download as JSON"onClick="ExportJSON()"/></div>
 
     <div class = "words"> And you can Add a new field manually or edit an already saved field!</div>
 	<div style="display: flex; justify-content: center">
@@ -407,15 +413,39 @@ function Tst(){
 
 }
 
-    function Export(){
+    function ExportJSON(){
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "http://localhost:82/AgLr/mvc/public/home/Export", true);
+        xmlhttp.open("GET", "http://localhost:82/AgLr/mvc/public/home/ExportAsJSON", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.onload = function(){
             xmlhttp.response;
         }
         xmlhttp.send();
+        alert("Your file has been saved into D:/Dowloads folder!");
     }
+
+    function ExportXML(){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "http://localhost:82/AgLr/mvc/public/home/ExportAsXML", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.onload = function(){
+            xmlhttp.response;
+        }
+        xmlhttp.send();
+        alert("Your file has been saved into D:/Dowloads folder!");
+    }
+
+    function ExportCSV(){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "http://localhost:82/AgLr/mvc/public/home/ExportAsCSV", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.onload = function(){
+            xmlhttp.response;
+        }
+        xmlhttp.send();
+        alert("Your file has been saved into D:/Dowloads folder!");
+    }
+
     function DeleteField(fieldId) {
         if(confirm("Are you sure you want to delete this field?")) {
         var xmlhttp = new XMLHttpRequest();
