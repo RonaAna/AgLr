@@ -100,10 +100,9 @@ class Home extends Controller
         $servername = "localhost";
         $username = "root";
         $dbname = "aglr";
-        // Create connection
+// Create connection
         $conn = new mysqli($servername, $username, null ,$dbname);
-
-        // Check connection
+// Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
@@ -124,34 +123,27 @@ class Home extends Controller
             $field->ClimaticChars = $row[8];
             $field->LandType = $row[9];
             $field->Value = $row[10];
-
             array_push($fields, $field);
-
         }
-
         $file1 = fopen("D:\\Downloads\\jsonExport.json", "w");
         fwrite($file1, json_encode($fields));
         fclose($file1);
-        /*header('Content-Type: application/json');
+        header('Content-Type: application/json');
         header('Content-Disposition: attachment; filename=jsonExport.json');
         header('Pragma: no-cache');
-        readfile("D:/Downloads/jsonExport.json");*/
-
+        readfile("D:/Downloads/jsonExport.json");
         $conn->close();
     }
-
     public function ExportAsXML() {
         $servername = "localhost";
         $username = "root";
         $dbname = "aglr";
 // Create connection
         $conn = new mysqli($servername, $username, null ,$dbname);
-
 // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-
         $fields = Array();
         $sql = "SELECT * FROM fields f join usersfields uf on f.id = uf.fieldID join users u on uf.userid = u.id where Email = 'ana@a.com'";
         $result = $conn->query($sql);
@@ -169,11 +161,8 @@ class Home extends Controller
             $field->ClimaticChars = $row[8];
             $field->LandType = $row[9];
             $field->Value = $row[10];
-
             array_push($fields, $field);
-
         }
-
         $file2 = fopen("D:\\Downloads\\xmlExport.xml", "w");
         require_once '../app/XmlHelper.php';
         fwrite($file2, XmlSerializer::toXml($fields, "Fields"));
@@ -182,22 +171,18 @@ class Home extends Controller
         header('Content-Disposition: attachment; filename=xmlExport.xml');
         header('Pragma: no-cache');
         readfile("D:/Downloads/xmlExport.xml");
-        
         $conn->close();
     }
-
     public function ExportAsCSV(){
         $servername = "localhost";
         $username = "root";
         $dbname = "aglr";
 // Create connection
         $conn = new mysqli($servername, $username, null ,$dbname);
-
 // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-
         $fields = Array();
         $sql = "SELECT * FROM fields f join usersfields uf on f.id = uf.fieldID join users u on uf.userid = u.id where Email = 'ana@a.com'";
         $result = $conn->query($sql);
@@ -215,15 +200,13 @@ class Home extends Controller
             $field->ClimaticChars = $row[8];
             $field->LandType = $row[9];
             $field->Value = $row[10];
-
             array_push($fields, $field);
-
         }
+
         $file3 = fopen("D:\\Downloads\\csvExport.csv", "w");
         fputcsv($file3, array_keys(get_object_vars($fields[0])));
         foreach ($fields as $flds) {
-
-                $flds = (array) $flds;
+            $flds = (array) $flds;
             fputcsv($file3, $flds);
         }
         fclose($file3);
@@ -231,11 +214,9 @@ class Home extends Controller
         header('Content-Disposition: attachment; filename=csvExport.csv');
         header('Pragma: no-cache');
         readfile("D:/Downloads/csvExport.csv");
-		
-		$conn->close();
+        $conn->close();
+
     }
-
-
     /*public function Export(){
         $servername = "localhost";
         $username = "root";
@@ -356,87 +337,131 @@ class Home extends Controller
         }
     }*/
 
-function ImportJSON($file){
-    $file1 = fopen($file, "r");
-    $content = fread($file1, filesize($file));
-    $json = json_decode($content);
-    fclose($file1);
-    return $json;
-}
-function ImportXML($file) {
-    $file2 = fopen($file,"r");
-    $content = fread($file2, filesize($file));
-    $obj = simplexml_load_string($content);
-    fclose($file2);
-    return $obj;
-}
-/*function ImportCSV($file){
-    $file3 = fopen($file, "r");
-    $csv = file_get_contents($file3);
-    $array = array_map("str_getcsv", explode("\n", $csv));
-    $json = json_encode($array);
+    function ImportJSON($file){
+        $file1 = fopen($file, "r");
+        $content = fread($file1, filesize($file));
+        $json = json_decode($content);
+        fclose($file1);
+        return $json;
+    }
+    function ImportXML($file) {
+        $file2 = fopen($file,"r");
+        $content = fread($file2, filesize($file));
+        $obj = simplexml_load_string($content);
+        fclose($file2);
+        return $obj;
+    }
+    /*function ImportCSV($file){
+        $file3 = fopen($file, "r");
+        $csv = file_get_contents($file3);
+        $array = array_map("str_getcsv", explode("\n", $csv));
+        $json = json_encode($array);
 
-    fclose($file3);
-    return $json;
-}*/
-function Import() {
-    $file = $_POST['file'];
-    $extension = pathinfo($file, PATHINFO_EXTENSION);;
-    $file = $_SERVER['DOCUMENT_ROOT'] . '/AgLr/'. $file;
-    $servername = "localhost";
-    $username = "root";
-    $dbname = "aglr";
+        fclose($file3);
+        return $json;
+    }*/
+    function ImportXMLorJSONInDB($json) {
+        $servername = "localhost";
+        $username = "root";
+        $dbname = "aglr";
 // Create connection
-    $conn = new mysqli($servername, $username, null ,$dbname);
+        $conn = new mysqli($servername, $username, null ,$dbname);
 
 // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        foreach ($json as $value){
+            $insertField = $conn->prepare("INSERT INTO fields (FieldName, RegisterNumber, Dimensions, Zone, Address, Latitude, Longitude, ClimaticChars, LandType, Value) values(?,?,?,?,?,?,?,?,?,?)");
+            $insertField->bind_param('sisssddssd',$value->FieldName, $value->RegisterNumber,$value->Dimensions,$value->Zone,$value->Address,$value->Latitude ,$value->Longitude,$value->ClimaticChars, $value->LandType, $value->Value);
+            $insertField->execute();
+            $insertField->store_result();
+            if($insertField == false) {
+                print_r($conn->error);
+                $insertField->close();
+                return;
+            }
+            else {
+                $fieldId = mysqli_insert_id($conn);
+                mysqli_free_result($insertField);
+                $userId=12;
+                $insertField->close();
+
+                $insertToUserFields = $conn->prepare("INSERT INTO UsersFields (UserId, FieldId) values(?,?);");
+                $insertToUserFields->bind_param('ii',$userId,$fieldId);
+                $insertToUserFields->execute();
+                $insertToUserFields->store_result();
+                if($insertToUserFields ==false) {
+                    print_r($conn->error);
+                    $insertToUserFields->close();
+                    return;
+                } else {
+                    echo "The insertion was awesome!";}}}
+        $conn->close();
     }
-    if($extension == 'json') {
-    $json = $this->ImportJSON($file);
-    //print_r($json);
+    function ImportCSVInDB($json){
+        $servername = "localhost";
+        $username = "root";
+        $dbname = "aglr";
+// Create connection
+        $conn = new mysqli($servername, $username, null ,$dbname);
+
+// Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        foreach ($json as $value){
+            $insertField = $conn->prepare("INSERT INTO fields (FieldName, RegisterNumber, Dimensions, Zone, Address, Latitude, Longitude, ClimaticChars, LandType, Value) values(?,?,?,?,?,?,?,?,?,?)");
+            $insertField->bind_param('sisssddssd',$value->FieldName, $value->RegisterNumber,$value->Dimensions,$value->Zone,$value->Address,$value->Latitude ,$value->Longitude,$value->ClimaticChars, $value->LandType, $value->Value);
+            $insertField->execute();
+            $insertField->store_result();
+            if($insertField == false) {
+                print_r($conn->error);
+                $insertField->close();
+                return;
+            }
+            else {
+                $fieldId = mysqli_insert_id($conn);
+                mysqli_free_result($insertField);
+                $userId=12;
+                $insertField->close();
+
+                $insertToUserFields = $conn->prepare("INSERT INTO UsersFields (UserId, FieldId) values(?,?);");
+                $insertToUserFields->bind_param('ii',$userId,$fieldId);
+                $insertToUserFields->execute();
+                $insertToUserFields->store_result();
+                if($insertToUserFields ==false) {
+                    print_r($conn->error);
+                    $insertToUserFields->close();
+                    return;
+                } else {
+                    echo "The insertion was awesome!";}}}
+        $conn->close();
     }
-    else if ($extension == 'xml') {
-        $json = $this->ImportXML($file);
+    function Import() {
+        $file = $_POST['file'];
+        $extension = pathinfo($file, PATHINFO_EXTENSION);;
+        $file = $_SERVER['DOCUMENT_ROOT'] . '/AgLr/'. $file;
+
+        if($extension == 'json') {
+            $json = $this->ImportJSON($file);
+            $this->ImportXMLorJSONInDB($json);
+        }
+        else if ($extension == 'xml') {
+            $json = $this->ImportXML($file);
+            //print_r($json);
+            $this->ImportXMLorJSONInDB($json);
+        }
+        else if ($extension == 'csv') {
+            $json = $this->csv_to_array($file);
+            $this->ImportCSVInDB($json);
+            //print_r($json);
+
+        }
+
         //print_r($json);
-    }
-    else if ($extension == 'csv') {
-        $json = $this->csv_to_array($file);
-        //$json = json_decode($this->ImportCSV($file));
-        print_r($json);
 
     }
-    foreach ($json as $value){
-    $insertField = $conn->prepare("INSERT INTO fields (FieldName, RegisterNumber, Dimensions, Zone, Address, Latitude, Longitude, ClimaticChars, LandType, Value) values(?,?,?,?,?,?,?,?,?,?)");
-    $insertField->bind_param('sisssddssd',$value->FieldName, $value->RegisterNumber,$value->Dimensions,$value->Zone,$value->Address,$value->Latitude ,$value->Longitude,$value->ClimaticChars, $value->LandType, $value->Value);
-    $insertField->execute();
-    $insertField->store_result();
-    if($insertField == false) {
-        print_r($conn->error);
-        $insertField->close();
-        return;
-    }
-    else {
-        $fieldId = mysqli_insert_id($conn);
-        mysqli_free_result($insertField);
-        $userId=12;
-        $insertField->close();
-
-        $insertToUserFields = $conn->prepare("INSERT INTO UsersFields (UserId,FieldId) values(?,?);");
-        $insertToUserFields->bind_param('ii',$userId,$fieldId);
-        $insertToUserFields->execute();
-        $insertToUserFields->store_result();
-        if($insertToUserFields ==false) {
-            print_r($conn->error);
-            $insertToUserFields->close();
-            return;
-        } else {
-            echo "The insertion was awesome!";}}}
-    $conn->close();
-    //print_r($json);
-
-}
 
     function csv_to_array($filename, $delimiter=',')
     {
@@ -451,7 +476,7 @@ function Import() {
             {
                 if(!$header){
                     $header = array_map('trim', $row);
-                print_r($header);}
+                    print_r($header);}
                 else
                     $data[] = array_combine($header, $row);
             }
@@ -460,105 +485,105 @@ function Import() {
         return $data;
     }
 
-public function AddField()
-{
-    $field = json_decode($_POST['field']);
+    public function AddField()
+    {
+        $field = json_decode($_POST['field']);
 
-    $servername = "localhost";
-    $username = "root";
-    $dbname = "aglr";
+        $servername = "localhost";
+        $username = "root";
+        $dbname = "aglr";
 // Create connection
-    $conn = new mysqli($servername, $username, null ,$dbname);
+        $conn = new mysqli($servername, $username, null ,$dbname);
 
 // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    //echo "Connected successfully. ";
-    $insertField = $conn->prepare("INSERT INTO fields (FieldName, RegisterNumber, Dimensions, Zone, Address, Latitude, Longitude, ClimaticChars, LandType, Value) values(?,?,?,?,?,?,?,?,?,?)");
-    $insertField->bind_param('sisssddssd',$field->FieldName, $field->RegisterNumber,$field->Dimensions,$field->Zone,$field->Address,$field->Latitude ,$field->Longitude,$field->ClimaticChars, $field->LandType, $field->Value);
-    $insertField->execute();
-    $insertField->store_result();
-    if($insertField == false) {
-        print_r($conn->error);
-        $insertField->close();
-        return;
-    }
-    else {
-        $fieldId = mysqli_insert_id($conn);
-        mysqli_free_result($insertField);
-        $userId=12;
-        $insertField->close();
-        $insertToUserFields = $conn->prepare("INSERT INTO UsersFields (UserId,FieldId) values(?,?);");
-        $insertToUserFields->bind_param('ii',$userId,$fieldId);
-        $insertToUserFields->execute();
-        $insertToUserFields->store_result();
-        if($insertToUserFields ==false) {
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        //echo "Connected successfully. ";
+        $insertField = $conn->prepare("INSERT INTO fields (FieldName, RegisterNumber, Dimensions, Zone, Address, Latitude, Longitude, ClimaticChars, LandType, Value) values(?,?,?,?,?,?,?,?,?,?)");
+        $insertField->bind_param('sisssddssd',$field->FieldName, $field->RegisterNumber,$field->Dimensions,$field->Zone,$field->Address,$field->Latitude ,$field->Longitude,$field->ClimaticChars, $field->LandType, $field->Value);
+        $insertField->execute();
+        $insertField->store_result();
+        if($insertField == false) {
             print_r($conn->error);
-            $insertToUserFields->close();
+            $insertField->close();
             return;
-        } else {
-        echo "The insertion was awesome!";}}
-    $conn->close();
-}
+        }
+        else {
+            $fieldId = mysqli_insert_id($conn);
+            mysqli_free_result($insertField);
+            $userId=12;
+            $insertField->close();
+            $insertToUserFields = $conn->prepare("INSERT INTO UsersFields (UserId,FieldId) values(?,?);");
+            $insertToUserFields->bind_param('ii',$userId,$fieldId);
+            $insertToUserFields->execute();
+            $insertToUserFields->store_result();
+            if($insertToUserFields ==false) {
+                print_r($conn->error);
+                $insertToUserFields->close();
+                return;
+            } else {
+                echo "The insertion was awesome!";}}
+        $conn->close();
+    }
 
-public function EditField()
-{
-    $field = json_decode($_POST['field']);
+    public function EditField()
+    {
+        $field = json_decode($_POST['field']);
 
-    $servername = "localhost";
-    $username = "root";
-    $dbname = "aglr";
+        $servername = "localhost";
+        $username = "root";
+        $dbname = "aglr";
 // Create connection
-    $conn = new mysqli($servername, $username, null ,$dbname);
+        $conn = new mysqli($servername, $username, null ,$dbname);
 
 // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        //echo "Connected successfully. ";
+        $editField = $conn->prepare("UPDATE fields set FieldName = ?, RegisterNumber = ?, Dimensions = ?, Zone = ?, Address = ?, Latitude = ?, Longitude = ?, ClimaticChars = ?, LandType = ?, Value = ? WHERE Id = ?");
+        $editField->bind_param('sisssddssdi',$field->FieldName, $field->RegisterNumber,$field->Dimensions,$field->Zone,$field->Address,$field->Latitude ,$field->Longitude,$field->ClimaticChars, $field->LandType, $field->Value,$field->FieldId);
+        $editField->execute();
+        $editField->store_result();
+        if($editField == false) {
+            print_r($conn->error);
+            $editField->close();
+            return;
+        }
+        else{
+            $editField->close();
+            echo "The update is made!";}
+        $conn->close();
     }
-    //echo "Connected successfully. ";
-    $editField = $conn->prepare("UPDATE fields set FieldName = ?, RegisterNumber = ?, Dimensions = ?, Zone = ?, Address = ?, Latitude = ?, Longitude = ?, ClimaticChars = ?, LandType = ?, Value = ? WHERE Id = ?");
-    $editField->bind_param('sisssddssdi',$field->FieldName, $field->RegisterNumber,$field->Dimensions,$field->Zone,$field->Address,$field->Latitude ,$field->Longitude,$field->ClimaticChars, $field->LandType, $field->Value,$field->FieldId);
-    $editField->execute();
-    $editField->store_result();
-    if($editField == false) {
-        print_r($conn->error);
-        $editField->close();
-        return;
-    }
-    else{
-        $editField->close();
-        echo "The update is made!";}
-    $conn->close();
-}
-public function Delete($fieldId){
-    $servername = "localhost";
-    $username = "root";
-    $dbname = "aglr";
-    // Create connection
-    $conn = new mysqli($servername, $username, null, $dbname);
+    public function Delete($fieldId){
+        $servername = "localhost";
+        $username = "root";
+        $dbname = "aglr";
+        // Create connection
+        $conn = new mysqli($servername, $username, null, $dbname);
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-    //echo "Connected successfully. ";
-    $field = json_decode($_POST['field']);
+        //echo "Connected successfully. ";
+        $field = json_decode($_POST['field']);
 
-    $deleteField = $conn->prepare("DELETE FROM fields where Id=?");
-    $deleteField->bind_param('i',$field);
-    $deleteField->execute();
-    if($deleteField == false) {
-        print_r($conn->error);
-        $deleteField->close();
-        return;
+        $deleteField = $conn->prepare("DELETE FROM fields where Id=?");
+        $deleteField->bind_param('i',$field);
+        $deleteField->execute();
+        if($deleteField == false) {
+            print_r($conn->error);
+            $deleteField->close();
+            return;
+        }
+        else {
+            echo "Field was deleted!";
+        }
+        $conn->close();
     }
-    else {
-        echo "Field was deleted!";
-    }
-    $conn->close();
-}
 
     public function PostTest()
     {
