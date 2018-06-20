@@ -255,12 +255,15 @@ Data of interest:
 
         });
             var j=0 ;
-            for(j; j<deleteBtn.length; j++){
+            for(j; j < deleteBtn.length; j++){
                 deleteBtn[j].addEventListener('click', function() {
-                    alert("Are you sure you want to delete this field?");
+                    if(confirm("Are you sure you want to delete this field?")) {
                     var fieldId = this.getAttribute("fieldId");
                     DeleteField(fieldId);
                     location.reload();
+                    } else {
+                        location.reload();
+                    }
                 });
             }
         };
@@ -414,7 +417,7 @@ function Tst(){
         xmlhttp.send();
     }
     function DeleteField(fieldId) {
-
+        if(confirm("Are you sure you want to delete this field?")) {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("POST", "http://localhost:82/AgLr/mvc/public/home/Delete/fieldId", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -425,7 +428,9 @@ function Tst(){
 
         }
         xmlhttp.send('field=' + JSON.stringify(fieldId));
-    }
+    } else {
+            RetrieveFields();
+        }}
 </script>
 </body>
 </html>
