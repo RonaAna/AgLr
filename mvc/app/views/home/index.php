@@ -181,7 +181,7 @@
                 rows.removeChild(index);
             }*/
             for (var index = 1; index< tableBody.children.length; index++) {
-                tr.removedNodes();
+                tr.remove();
                 //console.log(tableBody.children[index].tagName);
                 //tableBody.children[index].remove();
             }

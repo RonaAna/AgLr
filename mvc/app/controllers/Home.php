@@ -399,7 +399,7 @@ class Home extends Controller
                     echo "The insertion was awesome!";}}}
         $conn->close();
     }
-    function ImportCSVInDB($json){
+    function ImportCSVInDB($array){
         $servername = "localhost";
         $username = "root";
         $dbname = "aglr";
@@ -410,9 +410,9 @@ class Home extends Controller
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        foreach ($json as $value){
+        foreach ($array as $value){
             $insertField = $conn->prepare("INSERT INTO fields (FieldName, RegisterNumber, Dimensions, Zone, Address, Latitude, Longitude, ClimaticChars, LandType, Value) values(?,?,?,?,?,?,?,?,?,?)");
-            $insertField->bind_param('sisssddssd',$value->FieldName, $value->RegisterNumber,$value->Dimensions,$value->Zone,$value->Address,$value->Latitude ,$value->Longitude,$value->ClimaticChars, $value->LandType, $value->Value);
+            $insertField->bind_param('sisssddssd',$value["FieldName"], $value["RegisterNumber"],$value["Dimensions"],$value["Zone"],$value["Address"],$value["Latitude"],$value["Longitude"],$value["ClimaticChars"], $value["LandType"], $value["Value"]);
             $insertField->execute();
             $insertField->store_result();
             if($insertField == false) {
@@ -453,13 +453,9 @@ class Home extends Controller
             $this->ImportXMLorJSONInDB($json);
         }
         else if ($extension == 'csv') {
-            $json = $this->csv_to_array($file);
-            $this->ImportCSVInDB($json);
-            //print_r($json);
-
+            $array = $this->csv_to_array($file);
+            $this->ImportCSVInDB($array);
         }
-
-        //print_r($json);
 
     }
 
@@ -476,7 +472,7 @@ class Home extends Controller
             {
                 if(!$header){
                     $header = array_map('trim', $row);
-                    print_r($header);}
+                }
                 else
                     $data[] = array_combine($header, $row);
             }
