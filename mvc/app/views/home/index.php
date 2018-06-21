@@ -4,7 +4,8 @@
  * User: Ana-Maria
  * Date: 08.06.2018
  * Time: 22:14
- */?>
+ session_start();
+ echo 'Welcome '.$_SESSION['user']*/?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,12 @@
     <link rel="stylesheet" href="../../public/css/stylesheet.css" type="text/css">
 
 </head>
-<body style="background-image:url('../../public/Images/back.jpg');" >
+<!--<body style=" background-image:url('../../public/Images/back.jpg');">-->
+<body style="margin:0;padding:0;
+	background-repeat: no-repeat;
+	background-size: auto auto;
+	background-image:url('../../public/Images/land1.jpg');
+	width: 100%;height: auto;">
 <div class = "words" id="phrase1"> These are the fields for whom you have rigths!</div>
 
 <table id = "t01" onfocus="">
@@ -53,18 +59,17 @@
 </div>
 <div class = "words"> You can Export your data from here!</div>
 
-<div style="display: flex; justify-content: center; margin: 5px"><input class="submit-btn" type="submit" id="ExportCSV-btn" value="Download as CSV"onClick="ExportCSV()"/></div>
-
-<div style="display: flex; justify-content: center; margin: 5px"><input class="submit-btn" type="submit" id="ExportXML-btn" value="Download as XML"onClick="ExportXML()"/></div>
-
-<div style="display: flex; justify-content: center; margin: 5px"><input class="submit-btn" type="submit" id="ExportJSON-btn" value="Download as JSON"onClick="ExportJSON()"/></div>
+<div style="display: flex; justify-content: center; "><input class="submit-btn" style="margin-left: 10px;" type="submit" id="ExportCSV-btn" value="Download as CSV"onClick="ExportCSV()"/>
+    <input class="submit-btn" style="margin-left: 10px;" type="submit" id="ExportXML-btn" value="Download as XML"onClick="ExportXML()"/>
+    <input class="submit-btn" style="margin-left: 10px;" type="submit" id="ExportJSON-btn" value="Download as JSON"onClick="ExportJSON()"/>
+</div>
 
 <div class = "words"> And you can Add a new field manually or edit an already saved field!</div>
 <div style="display: flex; justify-content: center">
     <input class="submit-btn" type="submit" id = "addFieldInitialBtn" value = "Add field"/></div>
 
 </div>
-<div id="map" style="width: 350px; height: 350px;border: 2px solid #16a085;"></div>
+
 
 <div class = "add-field hide" id = "add-field-form">
     <div class = "fields">
@@ -89,11 +94,11 @@
     </div>
     <div class = "fields">
         Latitude:
-        <input type="text" id="latitude" placeholder="-20.000" required />
+        <input type="text" id="latitude" placeholder="45.23444763" required />
     </div>
     <div class = "fields">
         Longitude:
-        <input type="text" id="longitude" placeholder="45.23444763" required />
+        <input type="text" id="longitude" placeholder="27.2234432" required />
     </div>
     <div class = "fields">
         Pedoclimatic charcs:
@@ -120,9 +125,9 @@
     <input type="radio" name="owner" value="Farm"> Farm
 </form>
 <div style="display: flex; justify-content: center">
-    <input type="submit" class="submit-btn hide" id ="Add-button" value = "Add field"/>
+    <input type="submit" class="submit-btn hide" id ="Add-button" style="margin-bottom:5px;" value = "Add field"/>
 </div>
-
+<div id="map" class ="hide" style="width: 100%; height: 350px;border: 2px solid #16a085;"></div>
 <script type="text/javascript">
     function BetterImport()
     {
@@ -135,6 +140,7 @@
             xmlhttp.onload = function(){
                 debugger;
                 console.log(xmlhttp.response);
+                location.reload();
             }
             xmlhttp.send('file=' + file.replace(/C:\\fakepath\\/i, ''));}
         else {
@@ -158,7 +164,7 @@
                 rows.removeChild(index);
             }*/
             /*for (var index = 1; index < tableBody.children.length; index++) {
-                tr.remove();
+                tr.parentElement.removeChild();
                 //console.log(tableBody.children[index].tagName);
                 //tableBody.children[index].remove();
             }*/
@@ -201,7 +207,7 @@
                 innerHtml += '</ul>';
                 row2Cell.innerHTML = innerHtml;
                 /* var row2Cell2= row2.insertCell(1);
-                 row2Cell2.innerHTML = "<div id=\"map\" style=\"width: 350px; height: 350px;border: 2px solid #16a085;\"></div>"*/
+                 row2Cell2.innerHTML = "<div id=\"map\" style=\"width: 350px; height: 350px;border: 2px solid #16a085;\"></div>";*/
                 var attr = document.createAttribute("id");
                 var attr2 = document.createAttribute("style");
                 attr.value = "infoToShow-"+fields[i].FieldId;
@@ -212,8 +218,6 @@
                 /*var row2Cell2 = row2.insertCell(1);
                 row2Cell2.innerHTML ="<div id =\"map\" style =\" width: 100%; height: 300px; display:block; opacity:1; \" " +"></div>"*/
                 console.log(fields[i]);
-
-
             }
 
             var form = document.getElementById("add-field-form");
@@ -222,7 +226,7 @@
             var submitEdit = document.getElementById("saveEdit-btn");
             var submitAdd = document.getElementById("Add-button");
             var deleteBtn = document.getElementsByClassName("trash-button");
-
+            var map = document.getElementById("map");
             var j=0 ;
             for(j; j<editBtn.length; j++){
                 editBtn[j].addEventListener('click', function() {
@@ -230,7 +234,8 @@
                     var fieldId = this.getAttribute("fieldId");
                     var elementid = parseInt(this.parentNode.parentNode.getAttribute("elementid"));
                     submitAdd.classList.add('hide');
-
+                    map.classList.remove("hide");
+                    DisplayMap();
                     submitEdit.parentElement.classList.remove('hide');
                     document.getElementById("fieldname").value = fields[elementid].FieldName;
                     document.getElementById("registrationNr").value = fields[elementid].RegisterNumber;
@@ -257,9 +262,9 @@
                 submitEdit.parentElement.classList.add('hide');
                 submitAdd.addEventListener('click',function(){
                     AddField();
-                    debugger;
-                    location.reload();
-                    debugger;
+
+                    //location.reload();
+
                 });
 
             });
@@ -310,9 +315,9 @@
             xmlhttp.onload = function(){
                 if (xmlhttp.response.error !== null){
                     console.log(xmlhttp.response);
-                    alert("The field was added!");
                     RetrieveFields();
-
+                    alert("The field was added!");
+                    location.reload();
                 }
                 else{
                     alert("An error occurred!")
@@ -391,8 +396,7 @@
                 if (xmlhttp.response.error !== null) {
                     RetrieveFields();
                     console.log(xmlhttp.response);
-
-
+                    location.reload();
                 }
                 else {
                     alert("An error occurred!")
@@ -449,9 +453,7 @@
             xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.onload = function(){
                 RetrieveFields();
-
                 xmlhttp.response;
-
             }
             xmlhttp.send('field=' + JSON.stringify(fieldId));
         } else {
@@ -468,12 +470,12 @@
             for( var field in fields){
                 var latitude = fields[field].Latitude;
                 var longitude = fields[field].Longitude;
-                debugger;
+               // debugger;
                 var location = new google.maps.LatLng(latitude, longitude);
-                debugger;
                 marker.setPosition(location);
-                debugger;
+                //debugger;
             }
+            location.reload();
 
         }
         xmlhttp.send();
@@ -508,8 +510,6 @@
             map.setZoom(8);
             map.setCenter(marker.getPosition());
         });
-
-
     }
     function toggleBounce() {
         if (marker.getAnimation() !== null) {

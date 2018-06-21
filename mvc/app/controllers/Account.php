@@ -79,6 +79,19 @@ class Account extends Controller
             die("Connection failed: " . $conn->connect_error);
         }
 
+        /*if(isset($_POST['submit-login'])){
+            session_start();
+            $email = $_POST['user'];
+            $password = $_POST['password'];
+            $result = mysqli_query($conn,'SELECT * FROM users where Email = "'.$email.'" and Password = "'.$password.'";');
+        }
+        if (mysqli_num_rows($result)==1) {
+            $_SESSION['username'] = $email;
+            header('location: ../home/index.php');
+        }
+        else {
+
+        }*/
         //echo "Connected successfully. ";
         $userEmail = $conn->prepare("SELECT * FROM users where Email = ? and Password = ?");
         $passwd = sha1($user->Password);

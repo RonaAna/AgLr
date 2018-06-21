@@ -5,24 +5,30 @@
  * Date: 04.06.2018
  * Time: 1:00
  */
+require_once ('../app/views/account/index.php');
+
 session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title> Login </title>
-    <link rel="stylesheet" href="../public/css/stylesheet.css" type="text/css">
+    <link rel="stylesheet" href="../../public/css/stylesheet.css" type="text/css">
 </head>
-<body style="background-image:url('../public/Images/background.jpg')">
+<body style = "margin:0;padding:0;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-image:url('../../public/Images/land.jpg');
+	width: 100%;height: auto;">
 <div  id = "menu-button">
-    <input type="button" class = "menu-btn" id = "login-button" value="Login" onClick="HideRegister()">
+    <input type="button" class = "menu-btn" id = "login-button"  value="Login" onClick="HideRegister()">
     <input type="button" class = "menu-btn" id = "SignUp-button" value="Sign Up" onClick = "HideLogin()">
 </div>
 <div class = "welcome"> Welcome to Agricultural Land Manager! </div>
-<div class = "login" id = "loginID" method = "post" action="index/home.php">
-    <input class ="login-data" type="text" id ="user" placeholder="email" >
-    <input  class ="login-data" type="password" id ="password" placeholder="password" >
-    <input  class="submit-btn" type="submit" id = "submit-login" value="Submit" onClick="Login()">
+<div class = "login" id = "loginID" method = "post" <!--action="index/home.php"-->
+    <input class ="login-data" type="text" id ="user" name="username" placeholder="email" >
+    <input  class ="login-data" type="password" id ="password" name="password" placeholder="password" >
+    <input  class="submit-btn" type="submit" id = "submit-login" name = "bttnLogin" value="Submit" onClick="Login()">
 </div>
 <div class ="register" id = "register-form" method = "post" action = "account/Login">
     <form><input  class ="user-data" type="text" id="firstname" placeholder="FirstName" autofocus required />
@@ -37,7 +43,13 @@ session_start();
         </p>
     </form></div>
 <script>
-
+        /*$.post(Username, {
+            email: "user",
+            password: "password"
+        }, function(Login) {
+            alert(Login);
+            return false;
+        });*/
     function test()
     {
         var xmlhttp = new XMLHttpRequest();
