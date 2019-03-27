@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fields>
+  <Field>
+    <FieldId>1</FieldId>
+    <FieldName>my first field</FieldName>
+    <RegisterNumber>144444</RegisterNumber>
+    <Dimensions>234</Dimensions>
+    <Zone>acasa</Zone>
+    <Address>in oras</Address>
+    <Latitude>-11.073434</Latitude>
+    <Longitude>45.8797</Longitude>
+    <ClimaticChars/>
+    <LandType>arable</LandType>
+    <Value>2000</Value>
+  </Field>
+  <Field>
+    <FieldId>3</FieldId>
+    <FieldName>buni</FieldName>
+    <RegisterNumber>15555</RegisterNumber>
+    <Dimensions>2</Dimensions>
+    <Zone>acasa</Zone>
+    <Address>in oras</Address>
+    <Latitude>-11.07</Latitude>
+    <Longitude>45.8797</Longitude>
+    <ClimaticChars>oil</ClimaticChars>
+    <LandType>arable</LandType>
+    <Value>2000</Value>
+  </Field>
+</Fields>
